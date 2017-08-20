@@ -1,0 +1,34 @@
+<h2>担当者一覧</h2>
+<% flash.each do |name, msg| %>
+  <div class="alert alert-<%= name %>">
+    <a class="close" data-dismiss="alert">×</a>
+    <%= msg %>
+  </div>
+<% end %>
+<table class="table">
+  <thead>
+    <th>担当cd</th>
+    <th>担当者名</th>
+    <th>削除フラグ</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @tantos.each do |tanto| %>
+    <tr>
+      <td><%= tanto.id %></td>
+      <td><%= tanto.tanto_name %></td>
+      <td><%= tanto.del_flg > 0 ? "無効" : "有効" %></td>
+      <td>
+        <%= link_to '更新', tantos_edit_path(tanto), class: 'btn btn-info' %>
+      </td>
+      <td>
+        <%= link_to '削除', tanto, method: :delete, data: {confirm: '削除してもよろしいですか？'}, class: 'btn btn-danger'%>
+        </form>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新規担当者登録', tantos_new_path, class: 'btn btn-primary' %>

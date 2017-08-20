@@ -1,0 +1,37 @@
+<h2>顧客一覧</h2>
+<% flash.each do |name, msg| %>
+  <div class="alert alert-<%= name %>">
+    <a class="close" data-dismiss="alert">×</a>
+    <%= msg %>
+  </div>
+<% end %>
+<table class="table">
+  <thead>
+    <th>顧客cd</th>
+    <th>顧客名</th>
+    <th>削除フラグ</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.id %></td>
+      <td><%= customer.customer %></td>
+      <td><%= customer.del_flg > 0 ? "無効" : "有効" %></td>
+      <td>
+        <%= link_to '更新', customers_edit_path(customer), class: 'btn btn-info' %>
+      </td>
+      <td>
+        <form action="/customers/<%= customer.id %>" method="post">
+          <input type="submit" value="削除" class="btn btn-danger" onclick='return confirm("削除してよろしいですか？");'/>
+          <input type="hidden" name="_method" value="DELETE" />
+          <%= csrf_meta_tag %>
+        </form>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新規顧客登録', customers_new_path, class: 'btn btn-primary' %>

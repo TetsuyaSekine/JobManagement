@@ -1,0 +1,41 @@
+<h2>コードマスタ一覧</h2>
+<% flash.each do |name, msg| %>
+  <div class="alert alert-<%= name %>">
+    <a class="close" data-dismiss="alert">×</a>
+    <%= msg %>
+  </div>
+<% end %>
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>カテゴリcd</th>
+    <th>カテゴリ名</th>
+    <th>コンテンツcd</th>
+    <th>コンテンツ</th>
+    <th>削除フラグ</th>
+    <th>備考</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @code_msts.each do |code_mst| %>
+    <tr>
+      <td><%= code_mst.id %></td>
+      <td><%= code_mst.category_cd %></td>
+      <td><%= code_mst.category_name %></td>
+      <td><%= code_mst.contents_cd %></td>
+      <td><%= code_mst.contents %></td>
+      <td><%= code_mst.del_flg > 0 ? "無効" : "有効" %></td>
+      <td><%= code_mst.remark %></td>
+      <td>
+        <%= link_to '更新', code_msts_edit_path(code_mst), class: 'btn btn-info' %>
+      </td>
+      <td>
+        <%= link_to '削除', code_mst,method: 'DELETE', data: {confirm: '削除してもよろしいですか？'},class: 'btn btn-danger' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新規コードマスタ登録', code_msts_new_path, class: 'btn btn-primary' %>

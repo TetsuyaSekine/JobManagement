@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_cd: 1
+  customer: MyString
+  anken_summary: MyText
+  anken_status_cd: 1
+  anken_status: MyString
+  tanto_cd: 1
+  tanto: MyString
+  anken_ball_cd: MyString
+  integer: MyString
+  anken_ball: MyString
+  tourokudate: 2017-08-13 03:11:38
+  koushindate: 2017-08-13 03:11:38
+  remark: MyText
+
+two:
+  customer_cd: 1
+  customer: MyString
+  anken_summary: MyText
+  anken_status_cd: 1
+  anken_status: MyString
+  tanto_cd: 1
+  tanto: MyString
+  anken_ball_cd: MyString
+  integer: MyString
+  anken_ball: MyString
+  tourokudate: 2017-08-13 03:11:38
+  koushindate: 2017-08-13 03:11:38
+  remark: MyText

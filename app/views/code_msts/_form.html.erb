@@ -1,0 +1,59 @@
+<%= form_for(code_mst) do |f| %>
+  <% if code_mst.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(code_mst.errors.count, "件") %>のエラーがあります。</h2>
+
+      <ul>
+      <% code_mst.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 label-control">カテゴリーコード</label>
+      <div class="col-sm-8">
+        <%= f.text_field :category_cd,:class => 'form-control',:placeholder => '4桁左ゼロ詰め ex)0001' %>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 label-control">カテゴリー名</label>
+      <div class="col-sm-8">
+        <%= f.text_field :category_name,:class => 'form-control',:placeholder => 'カテゴリーの名前' %>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 label-control">コンテンツコード</label>
+      <div class="col-sm-8">
+        <%= f.text_field :contents_cd,:class => 'form-control',:placeholder => '数字' %>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 label-control">コンテンツ</label>
+      <div class="col-sm-8">
+        <%= f.text_field :contents,:class => 'form-control',:placeholder => 'コンテンツの名前' %>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group">
+      <div class="radio-inline col-sm-offset-2 col-sm-5">
+        <label class="col-sm-2"><%= f.radio_button :del_flg, '0', :checked => 'checked' %>有効</label>
+        <label class="col-sm-2"><%= f.radio_button :del_flg, '1' %>無効</label>
+      </div>
+      <div class="col-sm-5"></div>
+    </div>
+    <div class="form-group">
+      <label for="remark" class="col-sm-2 label-control">備考</label>
+      <div class="col-sm-8">
+        <%= f.text_area :remark,:class => 'form-control',:placeholder => '備考を記載' %>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <%= f.submit 'コードマスタ登録',:class => 'col-sm-offset-2 btn btn-primary' %>
+    <%= link_to 'キャンセル',code_msts_path, :class => 'btn btn-warning' %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<%= debug @tanto %>
+<p>
+  <strong>担当者名</strong>
+  <%= @tanto.tanto_name %>
+</p>
+
+<p>
+  <strong>削除フラグ</strong>
+  <%= @tanto.del_flg > 0 ? '無効' : '有効' %>
+</p>
+
+<%= link_to '更新', tantos_edit_path(tanto), class: 'btn btn-info' %>
+<%= link_to 'キャンセル',tantos_path, :class => 'btn btn-warning' %>

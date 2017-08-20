@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_cd: MyString
+  category_name: MyString
+  contents_cd: 1
+  contents: MyString
+  del_flg: 1
+  remark: MyText
+
+two:
+  category_cd: MyString
+  category_name: MyString
+  contents_cd: 1
+  contents: MyString
+  del_flg: 1
+  remark: MyText

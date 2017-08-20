@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SFA Job Management</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="mainStyle">
+      <div class="container">
+        <% if user_signed_in? %>
+          <nav class="navbar navbar-light">
+            <div class="nav-header">
+              <%= link_to 'Top',root_path ,class: "navbar-brand nav-link" %>
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarNav">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar" style={border-color: #fff}></span>
+        				<span class="icon-bar"></span>
+        				<span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="nav navbar-nav">
+                <li>
+                  <%= link_to '<i class="glyphicon glyphicon-tasks" aria-hidden = "true"></i> 案件情報'.html_safe,
+                  ankens_path,class: "a_custom nav-link"%>
+                </li>
+                <li>
+                  <%= link_to '<i class="glyphicon glyphicon-briefcase" aria-hidden = "true"></i> 顧客マスタ管理'.html_safe,
+                  customers_path,class: "nav-link a_custom"%>
+                </li>
+                <li>
+                  <%= link_to '<i class="glyphicon glyphicon-user" aria-hidden = "true"></i> 担当者管理'.html_safe,
+                  tantos_path,class: "nav-link a_custom" %>
+                </li>
+                <li>
+                  <%= link_to '<i class="glyphicon glyphicon-wrench" aria-hidden = "true"></i> コードマスタ管理'.html_safe,
+                  code_msts_path,class: "nav-link a_custom" %>
+                </li>
+
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <p class="navbar-text">
+                    <i class="glyphicon glyphicon-heart-empty" aria-hidden = "true"></i>
+                    <%= current_user.username.to_s + 'さん' %>
+                    <i class="glyphicon glyphicon-heart-empty" aria-hidden = "true"></i>
+                  </p>
+                </li>
+                <li>
+                  <p class="navbar-text"><%= "最終：" + current_user.last_sign_in_at.to_s %></p>
+                </li>
+                <li>
+                  <%= link_to '<i class="glyphicon glyphicon-log-out" aria-hidden = "true"></i> ログアウト'.html_safe,
+                  destroy_user_session_path, method: :delete,class: "nav-link a_custom navbar-right" %>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <% end %>
+        </ul>
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

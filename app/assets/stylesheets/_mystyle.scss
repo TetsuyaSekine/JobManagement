@@ -1,0 +1,55 @@
+body {
+//  margin:0px;
+//  padding:0px;
+//  text-align: center;
+}
+
+#mainStyle{
+//  margin-left: auto;
+//  margin-right: auto;
+//  padding-top: 70px;
+//  width: 800px;
+}
+
+h2 {
+padding: 0.25em 0.5em;/*上下 左右の余白*/
+color: #494949;/*文字色*/
+background: transparent;/*背景透明に*/
+border-left: solid 5px #7db4e6;/*左線*/
+}
+
+.a_custom {
+  color: #fff;
+}
+
+.navbar{
+    border-radius: 0;
+    border: none;
+    background-color: #003355; /* ベース基調となる濃い青 */
+    padding: 0em 0.5em;/*上下 左右の余白*/
+}
+
+.navbar-default .navbar-nav >li > a{
+    color: #fff;
+}
+.navbar-text {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav >li > a:hover{
+    color: #aaa;
+}
+.navbar-toggle, .icon-bar {
+    border:1px solid #fff;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  transition: .3s;
+}
+.table_custom {
+  width: 800px;
+  table-layout: fixed;
+  word-wrap: break-word;
+}

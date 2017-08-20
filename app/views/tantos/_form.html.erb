@@ -1,0 +1,32 @@
+<%= form_for(tanto) do |f| %>
+  <% if tanto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tanto.errors.count, "件") %>のエラーがあります。</h2>
+
+      <ul>
+      <% tanto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 label-control">担当者名</label>
+      <div class="col-sm-8">
+        <%= f.text_field :tanto_name,:class => 'form-control',:placeholder => '営業部：何某' %>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group">
+      <div class="radio-inline col-sm-offset-2 col-sm-5">
+        <label class="col-sm-2"><%= f.radio_button :del_flg, '0', :checked => 'checked' %>有効</label>
+        <label class="col-sm-2"><%= f.radio_button :del_flg, '1' %>無効</label>
+      </div>
+      <div class="col-sm-5"></div>
+    </div>
+    <%= f.submit '担当者登録',:class => 'col-sm-offset-2 btn btn-primary' %>
+    <%= link_to 'キャンセル',tantos_path, :class => 'btn btn-warning' %>
+  </div>
+<% end %>

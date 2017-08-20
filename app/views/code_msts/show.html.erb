@@ -1,0 +1,27 @@
+<p>
+  <strong>カテゴリコード</strong>
+  <%= @code_mst.category_cd %>
+</p>
+<p>
+  <strong>カテゴリ名</strong>
+  <%= @code_mst.category_name %>
+</p>
+<p>
+  <strong>コンテンツコード</strong>
+  <%= @code_mst.contents_cd %>
+</p>
+<p>
+  <strong>コンテンツ</strong>
+  <%= @code_mst.contents %>
+</p>
+<p>
+  <strong>削除フラグ</strong>
+  <%= @code_mst.del_flg > 0 ? '無効' : '有効' %>
+</p>
+<p>
+  <strong>備考</strong>
+  <%= @code_mst.remark %>
+</p>
+
+<%= link_to '更新', code_msts_edit_path(@code_mst), class: 'btn btn-info' %>
+<%= link_to 'キャンセル',code_msts_path, :class => 'btn btn-warning' %>

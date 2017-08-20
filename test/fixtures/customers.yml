@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_cd: 1
+  customer: MyString
+  del_flg: 1
+
+two:
+  customer_cd: 1
+  customer: MyString
+  del_flg: 1

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tanto_name: MyString
+  del_flg: 1
+
+two:
+  tanto_name: MyString
+  del_flg: 1
