@@ -41833,3 +41833,197 @@ Processing by ShainsController#index as HTML
 Completed 200 OK in 234ms (Views: 227.9ms | ActiveRecord: 2.6ms)
 
 
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 07:37:56 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (2.1ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 78ms (Views: 66.7ms | ActiveRecord: 3.5ms)
+
+
+Started DELETE "/users/sign_out" for 172.19.19.23 at 2017-08-22 08:00:11 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"aiMOzhXhbtGNzZWSrt1GRyyWN8bj8mhVsctxMmFTi2P9LOonJTMUJLfMoW1Zzl8n9ckI0Yp3q4RNSRWqzCnMLg=="}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://172.19.80.225:3000/
+Completed 302 Found in 14ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/" for 172.19.19.23 at 2017-08-22 08:00:11 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (2.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 84ms (Views: 81.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 172.19.19.23 at 2017-08-22 08:00:14 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"d/mcKqcTrMXcVkAAm399fvPMKlhWP33UmqXQaBx1gmo9NcGqXDVB8UDBEFW88Wltl+rDso6bf26iiT5Ntonh/A==", "user"=>{"login"=>"tetsuya", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"ログイン"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE (username = 'tetsuya' OR lower(email) = lower('tetsuya')) ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[33mUPDATE `users` SET `current_sign_in_at` = '2017-08-22 08:00:14', `last_sign_in_at` = '2017-08-22 06:16:41', `last_sign_in_ip` = '172.19.19.23', `sign_in_count` = 7, `updated_at` = '2017-08-22 08:00:14' WHERE `users`.`id` = 1[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://172.19.80.225:3000/ankens
+Completed 302 Found in 298ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 08:00:14 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (1.8ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 84ms (Views: 74.3ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/ankens/new" for 172.19.19.23 at 2017-08-22 08:00:20 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#new as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering ankens/new.html.erb within layouts/application
+  [1m[36mCustomer Load (0.8ms)[0m  [1m[34mSELECT `customers`.* FROM `customers` WHERE `customers`.`del_flg` = 0[0m
+  [1m[36mCodeMst Load (0.7ms)[0m  [1m[34mSELECT `code_msts`.* FROM `code_msts` WHERE `code_msts`.`category_cd` = '0001' AND `code_msts`.`del_flg` = 0[0m
+  [1m[36mTanto Load (0.6ms)[0m  [1m[34mSELECT `tantos`.* FROM `tantos` WHERE `tantos`.`del_flg` = 0[0m
+  Rendered ankens/_form.html.erb (41.0ms)
+  Rendered ankens/new.html.erb within layouts/application (42.9ms)
+Completed 200 OK in 125ms (Views: 98.8ms | ActiveRecord: 7.5ms)
+
+
+Started GET "/customers/new" for 172.19.19.23 at 2017-08-22 08:00:25 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CustomersController#new as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering customers/new.html.erb within layouts/application
+  Rendered customers/_form.html.erb (4.9ms)
+  Rendered customers/new.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 79ms (Views: 72.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/customers" for 172.19.19.23 at 2017-08-22 08:00:27 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CustomersController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 88ms (Views: 82.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/tantos" for 172.19.19.23 at 2017-08-22 08:00:31 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TantosController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering tantos/index.html.erb within layouts/application
+  [1m[36mTanto Load (0.7ms)[0m  [1m[34mSELECT `tantos`.* FROM `tantos`[0m
+  Rendered tantos/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 104ms (Views: 97.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/code_msts" for 172.19.19.23 at 2017-08-22 08:00:32 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CodeMstsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering code_msts/index.html.erb within layouts/application
+  [1m[36mCodeMst Load (0.8ms)[0m  [1m[34mSELECT `code_msts`.* FROM `code_msts`[0m
+  Rendered code_msts/index.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 85ms (Views: 78.6ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 08:00:37 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (0.9ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 73ms (Views: 65.1ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/shains" for 172.19.19.23 at 2017-08-22 08:00:48 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ShainsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering shains/index.html.erb within layouts/application
+  [1m[36mShain Load (1.7ms)[0m  [1m[34mSELECT `shains`.* FROM `shains`[0m
+  Rendered shains/index.html.erb within layouts/application (141.9ms)
+Completed 200 OK in 208ms (Views: 201.2ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/" for 172.19.19.23 at 2017-08-22 08:01:30 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://172.19.80.225:3000/ankens
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 08:01:30 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (1.4ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 73ms (Views: 65.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 08:02:08 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (0.9ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 73ms (Views: 65.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 08:02:09 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (0.8ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 74ms (Views: 66.6ms | ActiveRecord: 1.7ms)
+
+
