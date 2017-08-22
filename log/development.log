@@ -42027,3 +42027,107 @@ Processing by AnkensController#index as HTML
 Completed 200 OK in 74ms (Views: 66.6ms | ActiveRecord: 1.7ms)
 
 
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT GET_LOCK('7734710783270723280', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('7734710783270723280')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW CREATE TABLE `ankens`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'ankens'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `code_msts`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'code_msts'[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW CREATE TABLE `customers`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'customers'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `items`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'items'[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW CREATE TABLE `shains`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'shains'[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW CREATE TABLE `tantos`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tantos'[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW CREATE TABLE `test`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `users`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'users'[0m
+Started GET "/" for 172.19.19.23 at 2017-08-22 08:47:44 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+DEPRECATION WARNING: before_filter is deprecated and will be removed in Rails 5.1. Use before_action instead. (called from <class:ApplicationController> at /usr/local/src/app/controllers/application_controller.rb:6)
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://172.19.80.225:3000/ankens
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 75ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 08:47:45 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (1.8ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 963ms (Views: 922.3ms | ActiveRecord: 4.2ms)
+
+
+Started GET "/code_msts" for 172.19.19.23 at 2017-08-22 08:47:49 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CodeMstsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering code_msts/index.html.erb within layouts/application
+  [1m[36mCodeMst Load (0.7ms)[0m  [1m[34mSELECT `code_msts`.* FROM `code_msts`[0m
+  Rendered code_msts/index.html.erb within layouts/application (48.8ms)
+Completed 200 OK in 170ms (Views: 154.7ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/tantos" for 172.19.19.23 at 2017-08-22 08:47:50 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TantosController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering tantos/index.html.erb within layouts/application
+  [1m[36mTanto Load (0.7ms)[0m  [1m[34mSELECT `tantos`.* FROM `tantos`[0m
+  Rendered tantos/index.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 90ms (Views: 79.0ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/customers" for 172.19.19.23 at 2017-08-22 08:47:50 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CustomersController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering customers/index.html.erb within layouts/application
+  [1m[36mCustomer Load (0.7ms)[0m  [1m[34mSELECT `customers`.* FROM `customers`[0m
+  Rendered customers/index.html.erb within layouts/application (21.2ms)
+Completed 200 OK in 92ms (Views: 81.1ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/ankens" for 172.19.19.23 at 2017-08-22 08:47:51 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by AnkensController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mAnken Load (1.0ms)[0m  [1m[34mselect a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
+    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
+    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
+    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
+    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0[0m
+[#<Anken id: 1, anken_name: "GENESIS保守", anken_summary: "GENESISの保守案件 9月以降について\r\nBPの要員含めてOBPMに登録する必要あり。", anken_ball_cd: 1, last_update: "tetsuya", remark: "", created_at: "2017-08-22 01:52:32", updated_at: "2017-08-22 01:52:32">, #<Anken id: 2, anken_name: "HOLMES基盤改訂", anken_summary: "HOLMESのSFA化に合わせて、GENESISのデータをセキュアに外部で取り扱うことが必要になって...", anken_ball_cd: 1, last_update: "tetsuya", remark: "8/24 IT審議に向けた見積もり提示を行う予定。", created_at: "2017-08-22 02:05:27", updated_at: "2017-08-22 02:05:27">]
+  Rendering ankens/index.html.erb within layouts/application
+  Rendered ankens/index.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 73ms (Views: 63.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/shains" for 172.19.19.23 at 2017-08-22 08:48:02 +0000
+Cannot render console from 172.19.19.23! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ShainsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering shains/index.html.erb within layouts/application
+  [1m[36mShain Load (1.8ms)[0m  [1m[34mSELECT `shains`.* FROM `shains`[0m
+  Rendered shains/index.html.erb within layouts/application (158.7ms)
+Completed 200 OK in 245ms (Views: 233.4ms | ActiveRecord: 4.6ms)
+
+

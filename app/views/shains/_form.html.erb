@@ -1,0 +1,62 @@
+<%= form_for(shain) do |f| %>
+  <% if shain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shain.errors.count, "error") %> prohibited this shain from being saved:</h2>
+
+      <ul>
+      <% shain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :shain_id %>
+    <%= f.text_field :shain_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :section %>
+    <%= f.text_field :section %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pb %>
+    <%= f.text_field :pb %>
+  </div>
+
+  <div class="field">
+    <%= f.label :group_team %>
+    <%= f.text_field :group_team %>
+  </div>
+
+  <div class="field">
+    <%= f.label :grade %>
+    <%= f.text_field :grade %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :charge %>
+    <%= f.text_field :charge %>
+  </div>
+
+  <div class="field">
+    <%= f.label :del_flg %>
+    <%= f.number_field :del_flg %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

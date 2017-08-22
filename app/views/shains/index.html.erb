@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Shains</h2>
+<%= link_to 'New Shain', new_shain_path, class: 'btn btn-primary' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Shain</th>
+      <th>Name</th>
+      <th>Section</th>
+      <th>Pb</th>
+      <th>Group</th>
+      <th>Grade</th>
+      <th>Email</th>
+      <th>Charge</th>
+      <th>Del flg</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shains.each do |shain| %>
+      <tr>
+        <td><%= shain.shain_id %></td>
+        <td><%= shain.name %></td>
+        <td><%= shain.section %></td>
+        <td><%= shain.pb %></td>
+        <td><%= shain.group_team %></td>
+        <td><%= shain.grade %></td>
+        <td><%= shain.email %></td>
+        <td><%= shain.charge %></td>
+        <td><%= shain.del_flg %></td>
+        <td><%= link_to 'Show', shain, class: 'btn btn-info btn-sm' %></td>
+        <td><%= link_to 'Edit', edit_shain_path(shain), class: 'btn btn-warning btn-sm' %></td>
+        <td><%= link_to 'Destroy', shain, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-danger btn-sm' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

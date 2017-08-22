@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shain_id: MyString
+  name: MyString
+  section: MyString
+  pb: MyString
+  group: MyString
+  grade: MyString
+  email: MyString
+  charge: MyString
+  del_flg: 1
+
+two:
+  shain_id: MyString
+  name: MyString
+  section: MyString
+  pb: MyString
+  group: MyString
+  grade: MyString
+  email: MyString
+  charge: MyString
+  del_flg: 1

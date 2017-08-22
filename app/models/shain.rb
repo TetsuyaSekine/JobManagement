@@ -1,0 +1,2 @@
+class Shain < ApplicationRecord
+end
