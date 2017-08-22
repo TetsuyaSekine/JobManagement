@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819081106) do
+ActiveRecord::Schema.define(version: 20170822055744) do
 
   create_table "ankens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "customer_id",                   default: 0,  null: false
@@ -50,7 +50,18 @@ ActiveRecord::Schema.define(version: 20170819081106) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "option_to_anken1s", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "shains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "shain_id"
+    t.string   "name"
+    t.string   "section"
+    t.string   "pb"
+    t.string   "group_team"
+    t.string   "grade"
+    t.string   "email"
+    t.string   "charge"
+    t.integer  "del_flg"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tantos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -58,6 +69,10 @@ ActiveRecord::Schema.define(version: 20170819081106) do
     t.integer  "del_flg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "test", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "groups"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

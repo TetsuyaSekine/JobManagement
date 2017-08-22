@@ -7,7 +7,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module JobManagement
-  class JobManagementplication < Rails::JobManagementplication
+  class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # JobManagementplication configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

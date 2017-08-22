@@ -1,4 +1,6 @@
 <h2>顧客一覧</h2>
+<%= link_to '新規顧客登録', customers_new_path, class: 'btn btn-primary' %>
+
 <% flash.each do |name, msg| %>
   <div class="alert alert-<%= name %>">
     <a class="close" data-dismiss="alert">×</a>
@@ -34,4 +36,3 @@
   </tbody>
 </table>
 
-<%= link_to '新規顧客登録', customers_new_path, class: 'btn btn-primary' %>

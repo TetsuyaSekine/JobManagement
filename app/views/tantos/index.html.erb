@@ -1,4 +1,6 @@
 <h2>担当者一覧</h2>
+<%= link_to '新規担当者登録', tantos_new_path, class: 'btn btn-primary' %>
+
 <% flash.each do |name, msg| %>
   <div class="alert alert-<%= name %>">
     <a class="close" data-dismiss="alert">×</a>
@@ -31,4 +33,3 @@
   </tbody>
 </table>
 
-<%= link_to '新規担当者登録', tantos_new_path, class: 'btn btn-primary' %>
