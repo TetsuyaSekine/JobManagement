@@ -1,7 +1,7 @@
 <%= form_for(shain) do |f| %>
   <% if shain.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(shain.errors.count, "error") %> prohibited this shain from being saved:</h2>
+      <h2><%= pluralize(shain.errors.count, "件") %>のエラーが発生しています。:</h2>
 
       <ul>
       <% shain.errors.full_messages.each do |message| %>
@@ -10,53 +10,53 @@
       </ul>
     </div>
   <% end %>
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 label-control">社員番号</label>
+      <%= f.text_field :shain_id,class: "form-control con-sm-8" %>
+      <div class="col-sm-2"></div>
+    </div>
 
-  <div class="field">
-    <%= f.label :shain_id %>
-    <%= f.text_field :shain_id %>
-  </div>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+    <div class="form-group">
+      <%= f.label :section %>
+      <%= f.text_field :section %>
+    </div>
 
-  <div class="field">
-    <%= f.label :section %>
-    <%= f.text_field :section %>
-  </div>
+    <div class="form-group">
+      <%= f.label :pb %>
+      <%= f.text_field :pb %>
+    </div>
 
-  <div class="field">
-    <%= f.label :pb %>
-    <%= f.text_field :pb %>
-  </div>
+    <div class="form-group">
+      <%= f.label :group_team %>
+      <%= f.text_field :group_team %>
+    </div>
 
-  <div class="field">
-    <%= f.label :group_team %>
-    <%= f.text_field :group_team %>
-  </div>
+    <div class="form-group">
+      <%= f.label :grade %>
+      <%= f.text_field :grade %>
+    </div>
 
-  <div class="field">
-    <%= f.label :grade %>
-    <%= f.text_field :grade %>
-  </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
+    <div class="form-group">
+      <%= f.label :charge %>
+      <%= f.text_field :charge %>
+    </div>
 
-  <div class="field">
-    <%= f.label :charge %>
-    <%= f.text_field :charge %>
-  </div>
-
-  <div class="field">
-    <%= f.label :del_flg %>
-    <%= f.number_field :del_flg %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+      <%= f.label :del_flg %>
+      <%= f.number_field :del_flg %>
+    </div>
+    <%= f.submit '社員新規追加', class: "col-sm-2 btn btn-primary" %>
+    <%= link_to 'キャンセル',shains_path,class: "btn btn-warning" %>
+</div>
 <% end %>

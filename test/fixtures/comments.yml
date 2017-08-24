@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  anken_id: 1
+  ymd: MyString
+  anken_comment: MyText
+  last_update: MyString
+
+two:
+  anken_id: 1
+  ymd: MyString
+  anken_comment: MyText
+  last_update: MyString

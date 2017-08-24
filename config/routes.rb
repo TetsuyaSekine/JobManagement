@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   put 'ankens/:id', to: 'ankens#update'
   delete 'ankens/:id', to: 'ankens#destroy'
 
+  get '/ankens/comments/:anken_id', to: 'ankens#comment', as: 'comments'
+  post '/ankens/comments/:id', to: 'ankens#comment_create'
+
+
   get '/customers', to: 'customers#index'
   get '/customers/new', to: 'customers#new'
   get '/customers/;id', to: 'customers#show', as: 'customer'

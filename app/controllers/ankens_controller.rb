@@ -71,6 +71,26 @@ class AnkensController < ApplicationController
     end
   end
 
+  def comment
+    @anken = Anken.find(params[:anken_id])
+    @comment = Comment.new
+  end
+
+  def comment_create
+    @comment = Comment.new(comment_params)
+    @comment.anken_id = params[:id]
+    @comment.last_update = current_user.username
+    if @comment.invalid?
+      render :comment, flash: {errors: @comment.errors.full_messages}
+    else
+      if @comment.save
+        redirect_to ankens_path, success: 'コメントが登録されました。'
+      else
+        redirect_to comments_path, danger: 'コメントの作成に失敗しました。'
+      end
+    end
+  end
+
   private
     #顧客情報を取得(有効なレコードのみ)
     def getCustomers_for_options
@@ -94,6 +114,10 @@ class AnkensController < ApplicationController
     def anken_params
       params.require(:anken).permit(:customer_id,:anken_name,:anken_summary,
       :anken_status_cd,:tanto_id,:anken_ball_cd,:remark)
+    end
+
+    def comment_params
+      params.require(:comment).permit(:anken_id,:ymd,:anken_comment,:last_update)
     end
 
     def setLastUpdateUser

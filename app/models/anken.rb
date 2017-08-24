@@ -1,4 +1,7 @@
 class Anken < ApplicationRecord
+
+  has_many :comment
+
   validates :customer_id, presence: true
   validates :anken_name, presence: true
   validates :anken_summary, presence: true
