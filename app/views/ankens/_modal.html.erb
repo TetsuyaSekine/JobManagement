@@ -1,0 +1,36 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_for(@comment, remote: true) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel"><%= @title %></h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 label-control">案件名</label>
+            <label class="col-sm-10 label-control"><%= @anken.anken_name %></label>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 label-control">対象年月日</label>
+            <div class="col-sm-10">
+              <%= f.text_field :ymd,:class => "form-control",:id => 'cal_ymd',:placeholder => "YYYY/MM/DD" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 label-control">案件コメント</label>
+            <div class="col-sm-10">
+              <%= f.text_area :anken_comment,:class => "form-control",:placeholder => "案件に関するトピックスを記載" %>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit 'コメント登録',:class => 'col-sm-offset-2 btn btn-primary' %>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">キャンセル</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

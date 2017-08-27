@@ -1,0 +1,9 @@
+I"…(function() {
+  jQuery(function() {
+    return $('#cal_ymd').datepicker({
+      dateFormat: 'yy-mm-dd'
+    });
+  });
+
+}).call(this);
+:ET

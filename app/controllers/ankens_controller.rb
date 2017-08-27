@@ -1,15 +1,32 @@
 class AnkensController < ApplicationController
   before_action :anken_find, only: [:show,:edit,:update,:destroy]
+  before_action :comment_find, only: [:comment_edit,:comment_update,:comment_destroy]
 
   def index
-    @ankens = Anken.find_by_sql(
-    "select a.id,c.customer,a.anken_name,a.anken_summary,m.contents,t.tanto_name,a.anken_ball_cd,a.last_update,
-    a.remark,a.created_at,a.updated_at from ankens a LEFT OUTER JOIN customers c ON a.customer_id = c.id
-    LEFT OUTER JOIN tantos t ON a.tanto_id = t.id
-    LEFT OUTER JOIN code_msts m ON a.anken_status_cd = m.contents_cd
-    where c.del_flg=0 and t.del_flg = 0 and m.category_cd = '0001' and m.del_flg = 0")
 
-    logger.debug @ankens.inspect
+    @anken = Anken.new
+
+    if params[:anken].present?
+      @anken.anken_name = params[:anken][:anken_name]
+      @anken.anken_summary = params[:anken][:anken_summary]
+      @anken.customer_id = params[:anken][:customer_id]
+      @anken.tanto_id = params[:anken][:tanto_id]
+      @ankens = Anken.get_by_name(params[:anken][:anken_name]).get_by_summary(params[:anken][:anken_summary])
+      .get_by_customer_id(params[:anken][:customer_id]).get_by_tanto_id(params[:anken][:tanto_id])
+    else
+        @ankens = Anken.includes([:customer,:tanto,:code_mst])
+          .where(customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
+
+          logger.debug @ankens.each.with_index(1){ |value, index| puts "#{index} : #{value}" }
+    end
+
+    #検索条件用オブジェクト
+    @anken_search = Anken.new
+    #検索条件用案件ステータス、クライアント、担当者
+    getCustomers_for_options
+    getTantos_for_options
+    getCodemst_for_options('0001')
+
   end
 
   def new
@@ -72,8 +89,20 @@ class AnkensController < ApplicationController
   end
 
   def comment
+    logger.debug "testだよ。"
     @anken = Anken.find(params[:anken_id])
     @comment = Comment.new
+    @title = "コメント登録"
+  end
+
+  def comment_show
+    @anken = Anken.find(params[:id])
+  end
+
+  def comment_edit
+    @anken = Anken.find(params[:anken_id])
+    @comment = Comment.find(params[:id])
+    @title = "コメント更新"
   end
 
   def comment_create
@@ -88,6 +117,23 @@ class AnkensController < ApplicationController
       else
         redirect_to comments_path, danger: 'コメントの作成に失敗しました。'
       end
+    end
+  end
+
+  def comment_update
+    @comment.last_update = current_user.username
+    if @comment.update(comment_params)
+      redirect_to ankens_path, success: 'コメント更新が完了しました。'
+    else
+      redirect_to comments_path, danger: 'コメントの更新に失敗しました。'
+    end
+  end
+
+  def comment_destroy
+    if @comment.destroy
+      redirect_to ankens_path, success: 'コメントの削除が完了しました。'
+    else
+      redirect_to ankens_path, danger: 'コメントの削除に失敗しました。'
     end
   end
 
@@ -109,6 +155,10 @@ class AnkensController < ApplicationController
 
     def anken_find
       @anken = Anken.find(params[:id])
+    end
+
+    def comment_find
+      @comment = Comment.find(params[:id])
     end
 
     def anken_params

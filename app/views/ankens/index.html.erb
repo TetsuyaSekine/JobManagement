@@ -9,8 +9,6 @@
 <br>
 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#searchCondition"
 aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> 検索条件</button>
-<button type="button" class="btn btn-success">
-<span class="glyphicon glyphicon-search"></span> 検索</button>
 
 <div id="searchCondition" class="collapse">
   <div class="panel panel-default">
@@ -18,23 +16,11 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
       検索条件
     </div>
     <div class="panel-body">
-      <div class="form-horizontal">
-        <div class="form-group">
-          <label class="col-sm-2 label-control">案件名</label>
-          <div class="col-sm-7">
-            <input type="text" class="form-control">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-2 label-control">備考</label>
-          <div class="col-sm-7">
-            <input type="text" class="form-control">
-          </div>
-        </div>
-      </div>
+      <%= render "search",anken_search: @anken_search  %>
     </div>
   </div>
 </div>
+
 <table class="table table-hover table_custom">
   <thead>
     <th style="width:3%">id</th>
@@ -55,11 +41,11 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
     <% @ankens.each do |anken| %>
       <tr>
         <td rowspan="<%= anken.comment.length + 2 %>"><%= anken.id %></td>
-        <td><%= anken.customer %></td>
+        <td><%= anken.customer.customer %></td>
         <td><%= anken.anken_name %></td>
         <td><%= anken.anken_summary %></td>
-        <td><%= anken.contents %></td>
-        <td><%= anken.tanto_name %></td>
+        <td><%= anken.code_mst.contents %></td>
+        <td><%= anken.tanto.tanto_name %></td>
         <td><%= anken.anken_ball_cd > 0 ? "PPTボール" : "顧客ボール" %></td>
         <td><%= anken.last_update %></td>
         <td><%= anken.remark %></td>
@@ -73,14 +59,21 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
         </td>
       </tr>
       <td rowspan="<%= anken.comment.length + 1 %>">
-        <%= link_to 'コメント追加' ,comments_path(anken_id: anken.id),class: 'btn btn-danger btn-sm' %>
+        <%= link_to 'コメント追加' ,comments_path(anken_id: anken.id),class: 'btn btn-success btn-sm',
+         remote: true, 'data-toggle' => "modal", 'data-target' => "#comment_modal"  %>
       </td>
-      <% anken.comment.each do |c| %>
+      <% anken.comment.each do |comment| %>
         <tr>
-          <td><%= c.ymd %></td>
-          <td colspan="9"><%= c.anken_comment %></td>
+          <td><%= link_to '編集',comments_edit_path(anken_id: anken.id,id: comment.id), class: "btn btn-info btn-sm",
+                remote: true, 'data-toggle' => "modal", 'data-target' => "#comment_modal" %>
+              <%= link_to '削除',comment,method: :delete,data: {confirm: '削除してもよろしいですか？'},
+              class: 'btn btn-danger btn-sm' %></td>
+          <td><%= comment.ymd %></td>
+          <td colspan="9"><%= comment.anken_comment %></td>
         </tr>
       <% end %>
     <% end %>
+    <div id="comment_modal" class="modal fade" tabindex="-1"
+         role="dialog" aria-hidden="true"></div>
   </tbody>
 </table>

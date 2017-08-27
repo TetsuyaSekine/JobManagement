@@ -1,4 +1,7 @@
 class CodeMst < ApplicationRecord
+
+  has_many :anken, foreign_key: :contents_cd
+
   validates :category_cd, presence: true
   validates :category_name, presence: true
   validates :contents_cd, presence: true
