@@ -25,10 +25,9 @@
         <%= link_to '更新', customers_edit_path(customer), class: 'btn btn-info' %>
       </td>
       <td>
-        <%= link_to 'del', customer,method: :delete, data: {confirm: 'Are you all right?'}, class: 'btn btn-danger' %>
+        <%= link_to '削除', customer,method: :delete, data: {confirm: '削除してもよろしいですか？'}, class: 'btn btn-danger' %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-
