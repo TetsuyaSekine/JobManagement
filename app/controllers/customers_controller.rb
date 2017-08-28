@@ -31,13 +31,21 @@ class CustomersController < ApplicationController
   end
 
   def update
+
+    logger.debug "cutomer updating......"
     if @customer.valid?
+
+      logger.debug "customer.valid erorr....."
       render :edit, flash: {errors: @customer.errors.full_messages}
 
     else
       if @customer.update(customer_params)
-        redirect_to customers_path, success: '顧客情報の更新が完了しました。'
+        logger.debug "customer update complete!!" 
+
+       redirect_to customers_path, success: '顧客情報の更新が完了しました。'
       else
+        logger.debug "customer update error!!"
+
         redirect_to customers_edit_path, danger: '更新ができませんでした。'
       end
     end

@@ -25,11 +25,7 @@
         <%= link_to '更新', customers_edit_path(customer), class: 'btn btn-info' %>
       </td>
       <td>
-        <form action="/customers/<%= customer.id %>" method="post">
-          <input type="submit" value="削除" class="btn btn-danger" onclick='return confirm("削除してよろしいですか？");'/>
-          <input type="hidden" name="_method" value="DELETE" />
-          <%= csrf_meta_tag %>
-        </form>
+        <%= link_to 'del', customer,method: :delete, data: {confirm: 'Are you all right?'}, class: 'btn btn-danger' %>
       </td>
     </tr>
     <% end %>

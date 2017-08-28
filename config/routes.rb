@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :shains
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/ankens', to: 'ankens#index'
-  post '/ankens', to: 'ankens#index'
+  post '/ankens/search', to: 'ankens#index'
   get '/ankens/new', to: 'ankens#new'
   get '/ankens/:id', to: 'ankens#show', as: 'anken'
   get '/ankens/:id/edit', to: 'ankens#edit', as: 'ankens_edit'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   get '/customers', to: 'customers#index'
   get '/customers/new', to: 'customers#new'
-  get '/customers/;id', to: 'customers#show', as: 'customer'
+  get '/customers/:id', to: 'customers#show', as: 'customer'
   get '/customers/:id/edit', to: 'customers#edit', as: 'customers_edit'
   post '/customers', to: 'customers#create'
   patch '/customers/:id', to: 'customers#update'
