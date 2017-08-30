@@ -16,7 +16,7 @@
       <label class="col-sm-2 label-control">案件ステータス</label>
       <% @code_msts_for_options.each do |c| %>
         <label class="checkbox-inline">
-          <%= f.check_box :anken_status_cd, {}, '1',nil%>
+          <%= f.check_box :anken_status_cd, {multiple: true}, c.contents_cd ,nil%>
           <%= c.contents %>
         </label>
       <% end %>

@@ -11,8 +11,10 @@ class AnkensController < ApplicationController
       @anken.anken_summary = params[:anken][:anken_summary]
       @anken.customer_id = params[:anken][:customer_id]
       @anken.tanto_id = params[:anken][:tanto_id]
+      @anken.anken_status_cd = params[:anken][:anken_status_cd].map(&:to_i)
       @ankens = Anken.get_by_name(params[:anken][:anken_name]).get_by_summary(params[:anken][:anken_summary])
       .get_by_customer_id(params[:anken][:customer_id]).get_by_tanto_id(params[:anken][:tanto_id])
+      .get_by_anken_status_cd(params[:anken][:anken_status_cd].map(&:to_i))
     else
         @ankens = Anken.includes([:customer,:tanto,:code_mst])
           .where(customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
