@@ -22,18 +22,19 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
 
 <table class="table table-bordered table-condensed table-hover table_custom">
   <thead>
-    <th class = "active" style="width:3%">id</th>
-    <th class = "active" style="width:10%">顧客名</th>
+    <th class = "active" style="width:2%"></th>
+    <th class = "active" style="width:9%">顧客名</th>
     <th class = "active" tyle="width:10%">案件名</th>
-    <th class = "active" style="width:20%">案件概要</th>
+    <th class = "active" style="width:18%">案件概要</th>
     <th class = "active" style="width:4%">STS</th>
-    <th class = "active" style="width:6%">担当者</th>
-    <th class = "active" style="width:5%">B</th>
+    <th class = "active" style="width:6%">規模</th>
+    <th class = "active" style="width:9%">期間</th>
+    <th class = "active" style="width:5%">担当者</th>
+    <th class = "active" style="width:4%">B</th>
     <th class = "active" style="width:6%">更新者</th>
-    <th class = "active" style="width:14%">備考</th>
-    <th class = "active" style="width:6%">登録日</th>
-    <th class = "active" style="width:6%">更新日</th>
-    <th class = "active" style="width:5%"></th>
+    <th class = "active" style="width:6%">備考</th>
+    <th class = "active" style="width:8%">登録日</th>
+    <th class = "active" style="width:8%">更新日</th>
     <th class = "active" style="width:5%"></th>
   </thead>
   <tbody>
@@ -42,15 +43,16 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
         <td rowspan="<%= anken.comment.length + 2 %>"><%= anken.id %></td>
         <td><%= anken.customer.customer %></td>
         <td><%= anken.anken_name %></td>
-        <td><%= anken.anken_summary %></td>
+        <td><%= anken.anken_summary.truncate(42) %></td>
         <td><%= anken.code_mst.contents %></td>
+        <td><%= anken.budget_size %></td>
+        <td><%= anken.start_date %><%= ' - ' %><%= anken.end_date %></td>
         <td><%= anken.tanto.tanto_name %></td>
-        <td><%= anken.anken_ball_cd > 0 ? "PPTボール" : "顧客ボール" %></td>
+        <td><%= anken.anken_ball_cd > 0 ? "PPT持ち" : "顧客持ち" %></td>
         <td><%= anken.last_update %></td>
-        <td><%= anken.remark %></td>
+        <td><%= anken.remark.truncate(10) %></td>
         <td><%= anken.created_at %></td>
         <td><%= anken.updated_at %></td>
-        <td></td>
         <td>
           <%= link_to '更新' ,ankens_edit_path(anken.id), class: 'btn btn-info btn-sm' %>
           <%= link_to '削除' ,anken,method: :delete,data: {confirm: '削除してもよろしいですか？'},
@@ -68,7 +70,7 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
               <%= link_to '削除',comment,method: :delete,data: {confirm: '削除してもよろしいですか？'},
               class: 'btn btn-danger btn-sm' %></td>
           <td><%= comment.ymd %></td>
-          <td colspan="9"><%= comment.anken_comment %></td>
+          <td colspan="10"><%= comment.anken_comment %></td>
         </tr>
       <% end %>
     <% end %>

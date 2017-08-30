@@ -6,15 +6,26 @@ class AnkensController < ApplicationController
 
     @anken = Anken.new
 
+    #POSTされた場合
     if params[:anken].present?
       @anken.anken_name = params[:anken][:anken_name]
       @anken.anken_summary = params[:anken][:anken_summary]
       @anken.customer_id = params[:anken][:customer_id]
       @anken.tanto_id = params[:anken][:tanto_id]
-      @anken.anken_status_cd = params[:anken][:anken_status_cd].map(&:to_i)
+      if params[:anken][:anken_status_cd].present?
+        @anken.anken_status_cd = params[:anken][:anken_status_cd].map(&:to_i)
+
+        logger.debug params[:anken][:anken_status_cd]
+        logger.debug @anken.anken_status_cd
+      else
+        @anken.anken_status_cd = nil
+      end
+
       @ankens = Anken.get_by_name(params[:anken][:anken_name]).get_by_summary(params[:anken][:anken_summary])
       .get_by_customer_id(params[:anken][:customer_id]).get_by_tanto_id(params[:anken][:tanto_id])
-      .get_by_anken_status_cd(params[:anken][:anken_status_cd].map(&:to_i))
+      .get_by_anken_status_cd(params[:anken][:anken_status_cd])
+
+    #GETされた場合
     else
         @ankens = Anken.includes([:customer,:tanto,:code_mst])
           .where(customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
@@ -164,8 +175,8 @@ class AnkensController < ApplicationController
     end
 
     def anken_params
-      params.require(:anken).permit(:customer_id,:anken_name,:anken_summary,
-      :anken_status_cd,:tanto_id,:anken_ball_cd,:remark)
+      params.require(:anken).permit(:customer_id,:anken_name,:anken_summary,:budget_size,
+      :start_date,:end_date,:anken_status_cd,:tanto_id,:anken_ball_cd,:remark)
     end
 
     def comment_params

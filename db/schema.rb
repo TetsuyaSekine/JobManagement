@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830043513) do
+ActiveRecord::Schema.define(version: 20170830151252) do
 
   create_table "ankens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "customer_id",                   default: 0,  null: false
     t.string   "anken_name",                    default: "", null: false
     t.text     "anken_summary",   limit: 65535
-    t.integer  "anken_status_cd",               default: 0,  null: false
     t.string   "budget_size"
-    t.integer  "tanto_id",                      default: 0,  null: false
     t.string   "start_date"
     t.string   "end_date"
+    t.integer  "anken_status_cd",               default: 0,  null: false
+    t.integer  "tanto_id",                      default: 0,  null: false
     t.integer  "anken_ball_cd",                 default: 0,  null: false
     t.string   "last_update"
     t.text     "remark",          limit: 65535
@@ -81,10 +81,6 @@ ActiveRecord::Schema.define(version: 20170830043513) do
     t.integer  "del_flg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "test", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "groups"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
