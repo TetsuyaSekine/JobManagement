@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  detail: MyText
+  due: 2017-09-01
+  status: 1
+  remark: MyText
+
+two:
+  title: MyString
+  detail: MyText
+  due: 2017-09-01
+  status: 1
+  remark: MyText
