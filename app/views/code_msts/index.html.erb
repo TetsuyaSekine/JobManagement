@@ -1,6 +1,7 @@
 <h2>コードマスタ一覧</h2>
 <%= link_to '新規コードマスタ登録', code_msts_new_path, class: 'btn btn-primary' %>
-
+<%= link_to 'to shains',shains_path, class: 'btn btn-info' %>
+<%= link_to 'to tasks',tasks_path, class: 'btn btn-info' %>
 <% flash.each do |name, msg| %>
   <div class="alert alert-<%= name %>">
     <a class="close" data-dismiss="alert">×</a>
