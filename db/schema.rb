@@ -93,10 +93,6 @@ ActiveRecord::Schema.define(version: 20170901005021) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "test", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "groups"
-  end
-
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

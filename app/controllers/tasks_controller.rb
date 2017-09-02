@@ -15,10 +15,12 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    getCodemst_for_options('0002')
   end
 
   # GET /tasks/1/edit
   def edit
+    getCodemst_for_options('0002')
   end
 
   # POST /tasks
@@ -70,5 +72,10 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:title, :detail, :due, :status, :remark)
+    end
+
+    #コードマスタ情報と取得
+    def getCodemst_for_options(categoryCd)
+      @code_msts_for_options = CodeMst.where(category_cd: categoryCd).where(del_flg: 0)
     end
 end

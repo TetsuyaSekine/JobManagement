@@ -5,6 +5,13 @@ class AnkensController < ApplicationController
   def index
 
     @anken = Anken.new
+    #検索条件用オブジェクト
+    @anken_search = Anken.new
+    anken_search = @anken_search
+    #検索条件用案件ステータス、クライアント、担当者
+    getCustomers_for_options
+    getTantos_for_options
+    getCodemst_for_options('0001')
 
     #POSTされた場合
     if params[:anken].present?
@@ -14,9 +21,6 @@ class AnkensController < ApplicationController
       @anken.tanto_id = params[:anken][:tanto_id]
       if params[:anken][:anken_status_cd].present?
         @anken.anken_status_cd = params[:anken][:anken_status_cd].map(&:to_i)
-
-        logger.debug params[:anken][:anken_status_cd]
-        logger.debug @anken.anken_status_cd
       else
         @anken.anken_status_cd = nil
       end
@@ -25,21 +29,34 @@ class AnkensController < ApplicationController
       .get_by_customer_id(params[:anken][:customer_id]).get_by_tanto_id(params[:anken][:tanto_id])
       .get_by_anken_status_cd(params[:anken][:anken_status_cd])
 
+      #検索条件をセッションに格納する
+      session[:anken_name] = params[:anken][:anken_name]
+      session[:anken_summary] = params[:anken][:anken_summary]
+      session[:customer_id] = params[:anken][:customer_id]
+      session[:tanto_id] = params[:anken][:tanto_id]
+      session[:anken_status_cd] = params[:anken][:anken_status_cd]
+
+      #検索条件を、画面の検索フィールドに戻す
+      @anken_search.anken_name = params[:anken][:anken_name]
+      @anken_search.anken_summary = params[:anken][:anken_summary]
+      @anken_search.customer_id = params[:anken][:customer_id]
+      @anken_search.tanto_id = params[:anken][:tanto_id]
+      @anken_search.anken_status_cd = params[:anken][:anken_status_cd]
+
     #GETされた場合
     else
+      #検索条件が存在した場合は、検索条件を指定した案件検索を行う。
+      getSearchCondition(anken_search)
+      if anken_search.present?
+        @ankens = Anken.get_by_name(anken_search.anken_name).get_by_summary(anken_search.anken_summary)
+        .get_by_customer_id(anken_search.customer_id).get_by_tanto_id(anken_search.tanto_id)
+        .get_by_anken_status_cd(anken_search.anken_status_cd)
+
+      else
         @ankens = Anken.includes([:customer,:tanto,:code_mst])
           .where(customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
-
-          logger.debug @ankens.each.with_index(1){ |value, index| puts "#{index} : #{value}" }
+      end
     end
-
-    #検索条件用オブジェクト
-    @anken_search = Anken.new
-    #検索条件用案件ステータス、クライアント、担当者
-    getCustomers_for_options
-    getTantos_for_options
-    getCodemst_for_options('0001')
-
   end
 
   def new
@@ -102,7 +119,6 @@ class AnkensController < ApplicationController
   end
 
   def comment
-    logger.debug "testだよ。"
     @anken = Anken.find(params[:anken_id])
     @comment = Comment.new
     @title = "コメント登録"
@@ -181,6 +197,22 @@ class AnkensController < ApplicationController
 
     def comment_params
       params.require(:comment).permit(:anken_id,:ymd,:anken_comment,:last_update)
+    end
+
+    def getSearchCondition(anken_search)
+      anken_search.anken_name = session[:anken_name] == nil ? "" : session[:anken_name]
+      anken_search.anken_summary = session[:anken_summary] == nil ? "" : session[:anken_summary]
+      anken_search.customer_id = session[:customer_id] == nil ? "" : session[:customer_id]
+      anken_search.tanto_id = session[:tanto_id] == nil ? "" : session[:tanto_id]
+      anken_search.anken_status_cd = session[:anken_status_cd] == nil ? "" : session[:anken_status_cd]
+    end
+
+    def searchConditionClear
+      session[:anken_name] = nil
+      session[:anken_summary] = nil
+      session[:customer_id] = nil
+      session[:tanto_id] = nil
+      session[:anken_status_cd] = nil
     end
 
     def setLastUpdateUser
