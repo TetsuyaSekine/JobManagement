@@ -1,5 +1,5 @@
 class AnkensController < ApplicationController
-  before_action :anken_find, only: [:show,:edit,:update,:destroy]
+  before_action :anken_find, only: [:edit,:update,:destroy]
   before_action :comment_find, only: [:comment_edit,:comment_update,:comment_destroy]
 
   def index
@@ -53,8 +53,8 @@ class AnkensController < ApplicationController
         .get_by_anken_status_cd(anken_search.anken_status_cd)
 
       else
-        @ankens = Anken.includes([:customer,:tanto,:code_mst])
-          .where(customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
+        @ankens = Anken.includes([:customer,:tanto,:code_mst,:section])
+          .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
       end
     end
   end
@@ -69,6 +69,9 @@ class AnkensController < ApplicationController
   end
 
   def show
+    @anken = Anken.includes([:customer,:tanto,:code_mst,:section])
+      .where(ankens: {id: params[:id]},sections: {del_flg: 0}, customers: {del_flg: 0},tantos: {del_flg: 0},
+        code_msts: {category_cd: '0001',del_flg: 0})
   end
 
   def edit
@@ -81,6 +84,8 @@ class AnkensController < ApplicationController
 
   def create
     @anken = Anken.new(anken_params)
+
+    setSectionCd
     setLastUpdateUser
 
     #validationチェック
@@ -100,6 +105,7 @@ class AnkensController < ApplicationController
 
   def update
     #最終更新者をログインユーザーにセット
+    setSectionCd
     setLastUpdateUser
     if @anken.update(anken_params)
       redirect_to ankens_path, success: '案件情報の更新が完了しました。'
@@ -192,7 +198,7 @@ class AnkensController < ApplicationController
 
     def anken_params
       params.require(:anken).permit(:customer_id,:anken_name,:anken_summary,:budget_size,
-      :start_date,:end_date,:anken_status_cd,:tanto_id,:anken_ball_cd,:remark)
+      :start_date,:end_date,:pm,:asign_info,:anken_status_cd,:tanto_id,:anken_ball_cd,:remark)
     end
 
     def comment_params
@@ -213,6 +219,10 @@ class AnkensController < ApplicationController
       session[:customer_id] = nil
       session[:tanto_id] = nil
       session[:anken_status_cd] = nil
+    end
+
+    def setSectionCd
+      @anken.section_cd = current_user.section_id
     end
 
     def setLastUpdateUser

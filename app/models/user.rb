@@ -4,13 +4,16 @@ class User < ApplicationRecord
 
   attr_accessor :login
 
+  belongs_to :section
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
-#:confirmable, 
+#:confirmable,
 
   validates :username, uniqueness: {case_sensitive: :false},
             length: {minimum: 4, maximum: 20}
+  validates :section_id, presence: true
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

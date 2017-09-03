@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901005021) do
+ActiveRecord::Schema.define(version: 20170903105349) do
 
   create_table "ankens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "section_cd"
     t.integer  "customer_id",                   default: 0,  null: false
     t.string   "anken_name",                    default: "", null: false
     t.text     "anken_summary",   limit: 65535
     t.string   "budget_size"
     t.string   "start_date"
     t.string   "end_date"
+    t.string   "pm"
+    t.string   "asign_info"
     t.integer  "anken_status_cd",               default: 0,  null: false
     t.integer  "tanto_id",                      default: 0,  null: false
     t.integer  "anken_ball_cd",                 default: 0,  null: false
@@ -60,6 +63,16 @@ ActiveRecord::Schema.define(version: 20170901005021) do
     t.integer  "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "section_cd"
+    t.string   "section_name"
+    t.string   "parent_cd"
+    t.integer  "del_flg"
+    t.text     "remark",       limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "shains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -107,6 +120,7 @@ ActiveRecord::Schema.define(version: 20170901005021) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "username"
+    t.string   "section_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree

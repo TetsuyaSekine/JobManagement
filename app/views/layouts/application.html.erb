@@ -31,15 +31,7 @@
                   ankens_path,class: "a_custom nav-link"%>
                 </li>
                 <li>
-                  <%= link_to '<i class="glyphicon glyphicon-briefcase" aria-hidden = "true"></i> 顧客マスタ管理'.html_safe,
-                  customers_path,class: "nav-link a_custom"%>
-                </li>
-                <li>
-                  <%= link_to '<i class="glyphicon glyphicon-user" aria-hidden = "true"></i> 担当者管理'.html_safe,
-                  tantos_path,class: "nav-link a_custom" %>
-                </li>
-                <li>
-                  <%= link_to '<i class="glyphicon glyphicon-wrench" aria-hidden = "true"></i> コードマスタ管理'.html_safe,
+                  <%= link_to '<i class="glyphicon glyphicon-wrench" aria-hidden = "true"></i> メンテナンス'.html_safe,
                   code_msts_path,class: "nav-link a_custom" %>
                 </li>
 
@@ -47,7 +39,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <p class="navbar-text">
-                    <i class="glyphicon glyphicon-heart-empty" aria-hidden = "true"></i>
+                    <%= user_section.section_name %> :
                     <%= current_user.username.to_s + 'さん' %>
                     <i class="glyphicon glyphicon-heart-empty" aria-hidden = "true"></i>
                   </p>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Section cd:</strong>
+  <%= @section.section_cd %>
+</p>
+
+<p>
+  <strong>Section name:</strong>
+  <%= @section.section_name %>
+</p>
+
+<p>
+  <strong>Parent cd:</strong>
+  <%= @section.parent_cd %>
+</p>
+
+<p>
+  <strong>Del flg:</strong>
+  <%= @section.del_flg %>
+</p>
+
+<p>
+  <strong>Remark:</strong>
+  <%= @section.remark %>
+</p>
+
+<%= link_to 'Edit', edit_section_path(@section) %> |
+<%= link_to 'Back', sections_path %>

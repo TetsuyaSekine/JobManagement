@@ -21,6 +21,14 @@
     </div>
 
     <div class="form-group">
+      <label class="col-sm-2 label-control">所属組織</label>
+      <div class="col-sm-4">
+        <%= f.collection_select :section_id,@sections_for_options,:section_cd,:section_name,{},{class: 'form-control'} %>
+      </div>
+      <div class="col-sm-6"></div>
+    </div>
+
+    <div class="form-group">
       <label class="col-sm-2 label-control">パスワード</label>
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> 文字以上にしてください。)</em>

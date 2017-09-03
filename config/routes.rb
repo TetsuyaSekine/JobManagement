@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :sections
   resources :tasks
   resources :shains
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -48,8 +49,12 @@ Rails.application.routes.draw do
   put '/code_msts/:id', to: 'code_msts#update'
   delete '/code_msts/:id', to: 'code_msts#destroy'
 
-  devise_for :users
+  devise_for :users, :controllers => {
+    :sessions => 'users/sessions',
+    :registrations => 'users/registrations',
+    :passwords => 'users/passwords'
+  }
   devise_scope :user do
-      root :to => "devise/sessions#new"
+      root :to => "users/sessions#new"
   end
 end
