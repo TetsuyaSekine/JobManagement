@@ -44,10 +44,10 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
         <td rowspan="<%= anken.comment.length + 2 %>"><%= anken.id %></td>
         <td><%= anken.section.section_name %></td>
         <td><%= anken.customer.customer %></td>
-        <td><%= link_to anken.anken_name, anken,class: "btn-link" %></td>
+        <td><%= link_to anken.anken_name, anken,class: "btn-link a_custom2" %></td>
         <td><%= anken.anken_summary.truncate(42) %></td>
         <td><%= anken.code_mst.contents %></td>
-        <td><%= anken.budget_size %></td>
+        <td><%= anken.budget_size == nil ? "" : anken.budget_size.truncate(15) %></td>
         <td><%= anken.start_date %><%= ' - ' %><%= anken.end_date %></td>
         <td><%= anken.pm %></td>
         <td><%= anken.asign_info == nil ? "" : anken.asign_info.truncate(15) %></td>
@@ -67,8 +67,9 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
       </td>
       <% anken.comment.each do |comment| %>
         <tr>
-          <td><%= comment.ymd %></td>
-          <td colspan="9"><%= comment.anken_comment.truncate(120) %></td>
+          <td><span><%= image_tag "#{update_emphasis(:icon_contents,comment.updated_at)}" %></span>
+            <%= comment.ymd %></td>
+          <td colspan="9" class="<%= update_emphasis(:class_contents,comment.updated_at) %>"><%= comment.anken_comment.truncate(120) %></td>
           <td colspan="2"><%= link_to '編集',comments_edit_path(anken_id: anken.id,id: comment.id), class: "btn btn-default btn-sm",
               remote: true, 'data-toggle' => "modal", 'data-target' => "#comment_modal" %>
               <%= link_to '削除',comment,method: :delete,data: {confirm: '削除してもよろしいですか？'},
