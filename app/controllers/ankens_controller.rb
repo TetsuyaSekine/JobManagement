@@ -57,6 +57,14 @@ class AnkensController < ApplicationController
           .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
       end
     end
+
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        response.headers['Content-Disposition'] = "attachment; filename=案件一覧.xlsx"
+      end
+    end
+
   end
 
   def new

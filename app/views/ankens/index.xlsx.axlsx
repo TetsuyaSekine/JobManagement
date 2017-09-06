@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(title: 'task_list') do |sheet|
+  sheet.add_row ["id","部署","顧客","案件名","案件概要","予算","開始日","終了日","PM",
+  "アサイン情報","ステータス","担当者","ボール","最終更新者","備考","作成日","更新日"]
+  @ankens.each do |anken|
+    sheet.add_row [anken.id,anken.section.section_name,anken.anken_name,anken.anken_summary,
+    anken.budget_size,anken.start_date,anken.end_date,anken.pm,anken.asign_info,anken.code_mst.contents,
+    anken.tanto.tanto_name,anken.anken_ball_cd,anken.last_update,anken.remark,
+    anken.created_at,anken.updated_at]
+  end
+end
