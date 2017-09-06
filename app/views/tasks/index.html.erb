@@ -2,6 +2,7 @@
 
 <h1>Tasks</h1>
 <%= link_to 'New Task', new_task_path, class: 'btn btn-primary' %>
+<%= link_to 'Excel出力',tasks_path(@task, format: :xlsx), class: 'btn btn-info' %>
 
 <table class="table table-hover">
   <thead>
@@ -34,4 +35,3 @@
 </table>
 
 <br>
-

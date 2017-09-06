@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(title: 'task_list') do |sheet|
+  sheet.add_row ["id","タイトル","タスク詳細","期限","ステータス","備考"]
+  @tasks.each do |task|
+    sheet.add_row [task.id,task.title,task.detail,task.due,task.contents,task.remark]
+  end
+end

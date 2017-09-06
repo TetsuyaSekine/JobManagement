@@ -60,3 +60,5 @@ gem 'devise'
 gem 'rename'
 
 gem 'bootstrap-datepicker-rails'
+
+gem 'axlsx_rails'
