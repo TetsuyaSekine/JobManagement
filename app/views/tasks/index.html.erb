@@ -1,10 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tasks</h1>
+<%= link_to 'New Task', new_task_path, class: 'btn btn-primary' %>
 
 <table class="table table-hover">
   <thead>
-    <tr>
+    <tr style="background-color: midnightblue;color: white;">
       <th>ID</th>
       <th>Title</th>
       <th>Detail</th>
@@ -17,7 +18,7 @@
 
   <tbody>
     <% @tasks.each do |task| %>
-      <tr>
+      <tr class="<%= change_style2(task.status) == true ? 'color_lightgray' : '' %>">
         <td><%= task.id %></td>
         <td><%= task.title %></td>
         <td><%= task.detail %></td>
@@ -34,4 +35,3 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>

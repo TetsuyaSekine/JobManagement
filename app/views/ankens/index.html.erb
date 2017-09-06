@@ -25,7 +25,7 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
     <th class = "active" style="width:2%"></th>
     <th class = "active" style="width:5%">主幹</th>
     <th class = "active" style="width:9%">顧客名</th>
-    <th class = "active" tyle="width:10%">案件名</th>
+    <th class = "active" style="width:10%">案件名</th>
     <th class = "active" style="width:15%">案件概要</th>
     <th class = "active" style="width:4%">STS</th>
     <th class = "active" style="width:6%">規模</th>
@@ -40,7 +40,7 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
   </thead>
   <tbody>
     <% @ankens.each do |anken| %>
-      <tr>
+      <tr class="<%= change_style(anken.anken_status_cd) %>">
         <td rowspan="<%= anken.comment.length + 2 %>"><%= anken.id %></td>
         <td><%= anken.section.section_name %></td>
         <td><%= anken.customer.customer %></td>
@@ -61,12 +61,14 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
             class: 'btn btn-danger btn-sm' %>
         </td>
       </tr>
-      <td rowspan="<%= anken.comment.length + 1 %>" colspan="2">
-        <%= link_to 'コメント追加' ,comments_path(anken_id: anken.id),class: 'btn btn-success btn-sm',
-         remote: true, 'data-toggle' => "modal", 'data-target' => "#comment_modal"  %>
-      </td>
+      <tr class="<%= change_style(anken.anken_status_cd) %>">
+        <td rowspan="<%= anken.comment.length + 1 %>" colspan="2">
+          <%= link_to 'コメント追加' ,comments_path(anken_id: anken.id),class: 'btn btn-success btn-sm',
+           remote: true, 'data-toggle' => "modal", 'data-target' => "#comment_modal"  %>
+        </td>
+      </tr>
       <% anken.comment.each do |comment| %>
-        <tr>
+        <tr class="<%= change_style(anken.anken_status_cd) %>">
           <td><span><%= image_tag "#{update_emphasis(:icon_contents,comment.updated_at)}" %></span>
             <%= comment.ymd %></td>
           <td colspan="9" class="<%= update_emphasis(:class_contents,comment.updated_at) %>"><%= comment.anken_comment.truncate(120) %></td>

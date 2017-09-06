@@ -12,4 +12,20 @@ module ApplicationHelper
       end
     end
   end
+
+  def change_style(status)
+    if status.present?
+      if status == 6 || status == 7 || status == 8 || status == 9
+         return "color_lightgray"
+      end
+    end
+  end
+
+  def change_style2(status)
+    if status.present?
+      if status == 3
+        return true;
+      end 
+    end
+  end
 end
