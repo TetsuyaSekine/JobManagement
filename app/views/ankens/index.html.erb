@@ -44,7 +44,9 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> æ
         <td rowspan="<%= anken.comment.length + 2 %>"><%= anken.id %></td>
         <td><%= anken.section.section_name %></td>
         <td><%= anken.customer.customer %></td>
-        <td><%= link_to anken.anken_name, anken,class: "btn-link a_custom2" %></td>
+        <td><%= link_to anken.anken_name, anken,class: "btn-link a_custom2" %>
+          <span><%= image_tag "#{update_emphasis(:icon_contents,anken.created_at)}" %></span>
+        </td>
         <td><%= anken.anken_summary.truncate(42) %></td>
         <td><%= anken.code_mst.contents %></td>
         <td><%= anken.budget_size == nil ? "" : anken.budget_size.truncate(15) %></td>
@@ -69,8 +71,7 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> æ
       </tr>
       <% anken.comment.each do |comment| %>
         <tr class="<%= change_style(anken.anken_status_cd) %>">
-          <td><span><%= image_tag "#{update_emphasis(:icon_contents,comment.updated_at)}" %></span>
-            <%= comment.ymd %></td>
+          <td class="<%= update_emphasis(:class_contents,comment.updated_at) %>"><%= comment.ymd %></td>
           <td colspan="9" class="<%= update_emphasis(:class_contents,comment.updated_at) %>"><%= comment.anken_comment.truncate(120) %></td>
           <td colspan="2"><%= link_to 'ç·¨é›†',comments_edit_path(anken_id: anken.id,id: comment.id), class: "btn btn-default btn-sm",
               remote: true, 'data-toggle' => "modal", 'data-target' => "#comment_modal" %>
