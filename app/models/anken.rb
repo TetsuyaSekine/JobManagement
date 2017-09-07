@@ -6,6 +6,8 @@ class Anken < ApplicationRecord
   belongs_to :code_mst, foreign_key: :anken_status_cd
   belongs_to :section, foreign_key: :section_cd
 
+  attr_accessor :anken_status_cd_search
+
   validates :customer_id, presence: true
   validates :anken_name, presence: true
   validates :anken_summary, presence: true
@@ -18,4 +20,5 @@ class Anken < ApplicationRecord
   scope :get_by_customer_id, ->(customer_id) {where("customer_id = ?", "#{customer_id}") if customer_id.present? }
   scope :get_by_tanto_id, ->(tanto_id) {where("tanto_id = ?", "#{tanto_id}") if tanto_id.present? }
   scope :get_by_anken_status_cd, ->(anken_status_cd) {where(anken_status_cd: anken_status_cd ) if anken_status_cd.present? }
+
 end

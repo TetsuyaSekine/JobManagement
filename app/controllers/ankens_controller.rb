@@ -36,12 +36,14 @@ class AnkensController < ApplicationController
       session[:tanto_id] = params[:anken][:tanto_id]
       session[:anken_status_cd] = params[:anken][:anken_status_cd]
 
+logger.debug session.to_hash
+
       #検索条件を、画面の検索フィールドに戻す
       @anken_search.anken_name = params[:anken][:anken_name]
       @anken_search.anken_summary = params[:anken][:anken_summary]
       @anken_search.customer_id = params[:anken][:customer_id]
       @anken_search.tanto_id = params[:anken][:tanto_id]
-      @anken_search.anken_status_cd = params[:anken][:anken_status_cd]
+      @anken_search.anken_status_cd_search = params[:anken][:anken_status_cd]
 
     #GETされた場合
     else
@@ -50,7 +52,7 @@ class AnkensController < ApplicationController
       if anken_search.present?
         @ankens = Anken.get_by_name(anken_search.anken_name).get_by_summary(anken_search.anken_summary)
         .get_by_customer_id(anken_search.customer_id).get_by_tanto_id(anken_search.tanto_id)
-        .get_by_anken_status_cd(anken_search.anken_status_cd)
+        .get_by_anken_status_cd(anken_search.anken_status_cd_search)
 
       else
         @ankens = Anken.includes([:customer,:tanto,:code_mst,:section])
@@ -218,7 +220,7 @@ class AnkensController < ApplicationController
       anken_search.anken_summary = session[:anken_summary] == nil ? "" : session[:anken_summary]
       anken_search.customer_id = session[:customer_id] == nil ? "" : session[:customer_id]
       anken_search.tanto_id = session[:tanto_id] == nil ? "" : session[:tanto_id]
-      anken_search.anken_status_cd = session[:anken_status_cd] == nil ? "" : session[:anken_status_cd]
+      anken_search.anken_status_cd_search = session[:anken_status_cd] == nil ? [] : session[:anken_status_cd]
     end
 
     def searchConditionClear
