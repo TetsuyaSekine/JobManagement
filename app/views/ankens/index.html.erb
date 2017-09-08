@@ -21,6 +21,8 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> æ
 </div>
 <%= link_to 'Excelå‡ºåŠ›',ankens_path(@anken, format: :xlsx), class: 'btn btn-info' %>
 
+<%= page_entries_info @ankens %>
+
 <table class="table table-bordered table-condensed table-hover table_custom">
   <thead>
     <th class = "active" style="width:2%"></th>
@@ -85,3 +87,5 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> æ
          role="dialog" aria-hidden="true"></div>
   </tbody>
 </table>
+
+<%= paginate @ankens %>

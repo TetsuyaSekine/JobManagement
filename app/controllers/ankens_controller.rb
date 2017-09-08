@@ -27,7 +27,7 @@ class AnkensController < ApplicationController
 
       @ankens = Anken.get_by_name(params[:anken][:anken_name]).get_by_summary(params[:anken][:anken_summary])
       .get_by_customer_id(params[:anken][:customer_id]).get_by_tanto_id(params[:anken][:tanto_id])
-      .get_by_anken_status_cd(params[:anken][:anken_status_cd])
+      .get_by_anken_status_cd(params[:anken][:anken_status_cd]).page(params[:page])
 
       #検索条件をセッションに格納する
       session[:anken_name] = params[:anken][:anken_name]
@@ -36,7 +36,6 @@ class AnkensController < ApplicationController
       session[:tanto_id] = params[:anken][:tanto_id]
       session[:anken_status_cd] = params[:anken][:anken_status_cd]
 
-logger.debug session.to_hash
 
       #検索条件を、画面の検索フィールドに戻す
       @anken_search.anken_name = params[:anken][:anken_name]
@@ -52,11 +51,11 @@ logger.debug session.to_hash
       if anken_search.present?
         @ankens = Anken.get_by_name(anken_search.anken_name).get_by_summary(anken_search.anken_summary)
         .get_by_customer_id(anken_search.customer_id).get_by_tanto_id(anken_search.tanto_id)
-        .get_by_anken_status_cd(anken_search.anken_status_cd_search)
+        .get_by_anken_status_cd(anken_search.anken_status_cd_search).page(params[:page])
 
       else
         @ankens = Anken.includes([:customer,:tanto,:code_mst,:section])
-          .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0})
+          .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0}).page(params[:page])
       end
     end
 

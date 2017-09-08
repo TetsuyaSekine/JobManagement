@@ -4,6 +4,8 @@
 <%= link_to 'New Task', new_task_path, class: 'btn btn-primary' %>
 <%= link_to 'Excel出力',tasks_path(@task, format: :xlsx), class: 'btn btn-info' %>
 
+<%= page_entries_info @tasks %>
+
 <table class="table table-hover">
   <thead>
     <tr style="background-color: midnightblue;color: white;">
@@ -34,4 +36,4 @@
   </tbody>
 </table>
 
-<br>
+<%= paginate @tasks %>

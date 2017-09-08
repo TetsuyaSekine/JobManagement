@@ -28,4 +28,11 @@ module ApplicationHelper
       end 
     end
   end
+
+  def isDisabled(bln)
+    if bln
+      return "disabled"
+    end
+  end
+
 end

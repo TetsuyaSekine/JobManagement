@@ -62,3 +62,5 @@ gem 'rename'
 gem 'bootstrap-datepicker-rails'
 
 gem 'axlsx_rails'
+
+gem 'kaminari'

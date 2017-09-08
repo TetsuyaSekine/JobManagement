@@ -21,4 +21,6 @@ class Anken < ApplicationRecord
   scope :get_by_tanto_id, ->(tanto_id) {where("tanto_id = ?", "#{tanto_id}") if tanto_id.present? }
   scope :get_by_anken_status_cd, ->(anken_status_cd) {where(anken_status_cd: anken_status_cd ) if anken_status_cd.present? }
 
+  paginates_per 10
+
 end
