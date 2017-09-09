@@ -16,6 +16,14 @@
       <%= link_to 'キャンセル',ankens_path, :class => 'btn btn-warning' %>
     </div>
     <div class="form-group">
+      <label class="col-sm-2 label-control">主幹部署</label>
+      <div class="col-sm-8">
+          <%=  f.collection_radio_buttons :section_cd,
+          @sections_for_options,:section_cd,:section_name  %>
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <div class="form-group">
       <label class="col-sm-2 label-control">顧客</label>
       <div class="col-sm-7">
          <%= f.collection_select :customer_id, @customers_for_options,:id,:customer,{},{class: 'form-control'} %>
