@@ -1,7 +1,8 @@
 
 <h2>社員情報一覧</h2>
 <p id="notice"><%= notice %></p>
-<%= link_to 'New Shain', new_shain_path, class: 'btn btn-primary' %>
+<%= link_to '社員新規登録', new_shain_path, class: 'btn btn-primary' %>
+<%= page_entries_info @shains %>
 <table class="table">
   <thead>
     <tr>
@@ -30,12 +31,10 @@
         <td><%= shain.email %></td>
         <td><%= shain.charge %></td>
         <td><%= shain.del_flg %></td>
-        <td><%= link_to 'Show', shain, class: 'btn btn-info btn-sm' %></td>
-        <td><%= link_to 'Edit', edit_shain_path(shain), class: 'btn btn-warning btn-sm' %></td>
-        <td><%= link_to 'Destroy', shain, method: :delete, data: { confirm: '削除してもよろしいですか？?' },class: 'btn btn-danger btn-sm' %></td>
+        <td><%= link_to '編集', edit_shain_path(shain), class: 'btn btn-info btn-sm' %></td>
+        <td><%= link_to '削除', shain, method: :delete, data: { confirm: '削除してもよろしいですか？?' },class: 'btn btn-danger btn-sm' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
+<%= paginate @shains %>

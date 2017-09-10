@@ -2,7 +2,7 @@ class CustomersController < ApplicationController
   before_action :customer_find, only: [:show,:edit,:update,:destroy]
 
   def index
-    @customers = Customer.all
+    @customers = Customer.all.page(params[:page])
   end
 
   def new

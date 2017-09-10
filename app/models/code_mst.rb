@@ -7,4 +7,6 @@ class CodeMst < ApplicationRecord
   validates :contents_cd, presence: true
   validates :contents, presence: true
   validates :del_flg, presence: true
+
+  paginates_per 10
 end

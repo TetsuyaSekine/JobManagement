@@ -2,7 +2,7 @@ class CodeMstsController < ApplicationController
   before_action :code_mst_find, only: [:show,:edit,:update,:destroy]
 
   def index
-    @code_msts = CodeMst.all
+    @code_msts = CodeMst.all.page(params[:page])
   end
 
   def new

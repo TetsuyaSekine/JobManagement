@@ -2,7 +2,7 @@ class TantosController < ApplicationController
   before_action :tanto_find, only: [:show,:edit,:update,:destroy]
 
   def index
-    @tantos = Tanto.all
+    @tantos = Tanto.all.page(params[:page])
   end
 
   def new

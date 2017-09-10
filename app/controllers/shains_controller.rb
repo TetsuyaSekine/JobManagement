@@ -4,7 +4,7 @@ class ShainsController < ApplicationController
   # GET /shains
   # GET /shains.json
   def index
-    @shains = Shain.all
+    @shains = Shain.all.page(params[:page])
   end
 
   # GET /shains/1

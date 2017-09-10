@@ -4,7 +4,7 @@ class SectionsController < ApplicationController
   # GET /sections
   # GET /sections.json
   def index
-    @sections = Section.all
+    @sections = Section.all.page(params[:page])
   end
 
   # GET /sections/1
@@ -28,7 +28,7 @@ class SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to @section, notice: 'Section was successfully created.' }
+        format.html { redirect_to sections_path, success: '部署が正常に登録されました。' }
         format.json { render :show, status: :created, location: @section }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to @section, notice: 'Section was successfully updated.' }
+        format.html { redirect_to @section, success: '部署の更新が完了しました。' }
         format.json { render :show, status: :ok, location: @section }
       else
         format.html { render :edit }

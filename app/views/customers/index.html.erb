@@ -7,6 +7,8 @@
     <%= msg %>
   </div>
 <% end %>
+<%= page_entries_info @customers %>
+
 <table class="table">
   <thead>
     <th>顧客cd</th>
@@ -31,3 +33,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @customers %>

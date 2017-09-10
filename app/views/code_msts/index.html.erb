@@ -1,16 +1,13 @@
 <h2>コードマスタ一覧</h2>
 <%= link_to '新規コードマスタ登録', code_msts_new_path, class: 'btn btn-primary' %>
-<%= link_to '顧客情報', customers_path, class: 'btn btn-info' %>
-<%= link_to '担当者', tantos_path, class: 'btn btn-info' %>
-<%= link_to '部署', sections_path, class: 'btn btn-info' %>
-<%= link_to '社員情報',shains_path, class: 'btn btn-info' %>
-<%= link_to 'タスク(TODO)',tasks_path, class: 'btn btn-info' %>
 <% flash.each do |name, msg| %>
   <div class="alert alert-<%= name %>">
     <a class="close" data-dismiss="alert">×</a>
     <%= msg %>
   </div>
 <% end %>
+
+<%= page_entries_info @code_msts %>
 <table class="table">
   <thead>
     <th>id</th>
@@ -43,3 +40,4 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @code_msts %>
