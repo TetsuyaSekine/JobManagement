@@ -30,9 +30,22 @@
                   <%= link_to '<i class="glyphicon glyphicon-tasks" aria-hidden = "true"></i> 案件情報'.html_safe,
                   ankens_path,class: "a_custom nav-link"%>
                 </li>
-                <li>
+                <li class="dropdown">
                   <%= link_to '<i class="glyphicon glyphicon-wrench" aria-hidden = "true"></i> メンテナンス'.html_safe,
-                  code_msts_path,class: "nav-link a_custom" %>
+                  "#",class: "nav-link a_custom",'data-toggle' => "dropdown",'aria-haspopup' => "true",'role' => "button",'aria-expanded' => "false" %>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to '<i class="glyphicon glyphicon-lock" aria-hidden = "true"></i> 顧客情報管理'.html_safe,
+                    customers_path,class: "nav_link a_custom" %></li>
+                    <li><%= link_to '<i class="glyphicon glyphicon-user" aria-hidden = "true"></i> 担当者情報管理'.html_safe,
+                    tantos_path,class: "nav_link a_custom" %></li>
+                    <li><%= link_to '<i class="glyphicon glyphicon-tags" aria-hidden = "true"></i> 社員情報管理'.html_safe,
+                    shains_path,class: "nav_link a_custom" %></li>
+                    <li><%= link_to '<i class="glyphicon glyphicon-cog" aria-hidden = "true"></i> コードマスタ管理'.html_safe,
+                    code_msts_path,class: "nav_link a_custom" %></li>
+                    <li class="divider" role="separator"></li>
+                    <li><%= link_to '<i class="glyphicon glyphicon-ok" aria-hidden = "true"></i> タスク管理'.html_safe,
+                    tasks_path,class: "nav_link a_custom" %></li>
+                  </ul>
                 </li>
 
               </ul>
@@ -48,7 +61,6 @@
                     <li><%= link_to '<i class="glyphicon glyphicon-user" aria-hidden = "true"></i> ユーザー情報変更'.html_safe,
                       edit_user_registration_path,class: "nav-link a_custom" %>
                     </li>
-                    <li><a href="#">アクション2</a></li>
                     <li class="divider" role="separator"></li>
                     <li>
                       <%= link_to '<i class="glyphicon glyphicon-log-out" aria-hidden = "true"></i> ログアウト'.html_safe,
