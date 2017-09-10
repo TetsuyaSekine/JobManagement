@@ -37,19 +37,24 @@
 
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <p class="navbar-text">
-                    <%= user_section.section_name %> :
-                    <%= current_user.username.to_s + 'さん' %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" style="color: white;">
                     <i class="glyphicon glyphicon-heart-empty" aria-hidden = "true"></i>
-                  </p>
-                </li>
-                <li>
-                  <p class="navbar-text"><%= "最終：" + current_user.last_sign_in_at.to_s %></p>
-                </li>
-                <li>
-                  <%= link_to '<i class="glyphicon glyphicon-log-out" aria-hidden = "true"></i> ログアウト'.html_safe,
-                  destroy_user_session_path, method: :delete,class: "nav-link a_custom navbar-right" %>
+                    <%= user_section.section_name %> :
+                    <%= current_user.username.to_s + 'さん ' %><span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to '<i class="glyphicon glyphicon-user" aria-hidden = "true"></i> ユーザー情報変更'.html_safe,
+                      edit_user_registration_path,class: "nav-link a_custom" %>
+                    </li>
+                    <li><a href="#">アクション2</a></li>
+                    <li class="divider" role="separator"></li>
+                    <li>
+                      <%= link_to '<i class="glyphicon glyphicon-log-out" aria-hidden = "true"></i> ログアウト'.html_safe,
+                      destroy_user_session_path, method: :delete,class: "nav-link a_custom" %>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>

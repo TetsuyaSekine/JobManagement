@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :getSections_for_options, only: [:new,:edit]
+
   def cancel
     super
   end
@@ -6,8 +8,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
   def new
-    #組織マスタを取得する。
-    @sections_for_options = Section.where(del_flg: '0')
     super
   end
   def edit
@@ -19,4 +19,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def destroy
     super
   end
+  private
+    def getSections_for_options
+      @sections_for_options = Section.where(del_flg: '0')
+    end
 end
