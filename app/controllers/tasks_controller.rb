@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.joins("LEFT OUTER JOIN code_msts ON tasks.status = code_msts.contents_cd")
-    .select("tasks.*,code_msts.contents").where(code_msts: {category_cd: '0002',del_flg: 0})
+    .select("tasks.*,code_msts.contents").where(code_msts: {category_cd: '0002',del_flg: 0}).order(updated_at: :desc)
     .page(params[:page])
 
     respond_to do |format|

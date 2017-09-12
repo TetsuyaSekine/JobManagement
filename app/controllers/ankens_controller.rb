@@ -32,7 +32,7 @@ class AnkensController < ApplicationController
 
       @ankens = Anken.get_by_section_cd(params[:anken][:section_cd]).get_by_name(params[:anken][:anken_name])
       .get_by_summary(params[:anken][:anken_summary]).get_by_customer_id(params[:anken][:customer_id])
-      .get_by_tanto_id(params[:anken][:tanto_id]).get_by_anken_status_cd(params[:anken][:anken_status_cd]).page(params[:page])
+      .get_by_tanto_id(params[:anken][:tanto_id]).get_by_anken_status_cd(params[:anken][:anken_status_cd]).order(updated_at: :desc).page(params[:page])
 
       #検索条件をセッションに格納する
       session[:section_cd] = params[:anken][:section_cd]
@@ -57,11 +57,11 @@ class AnkensController < ApplicationController
       if anken_search.present?
         @ankens = Anken.get_by_section_cd(anken_search.section_cd_search).get_by_name(anken_search.anken_name)
         .get_by_summary(anken_search.anken_summary).get_by_customer_id(anken_search.customer_id)
-        .get_by_tanto_id(anken_search.tanto_id).get_by_anken_status_cd(anken_search.anken_status_cd_search).page(params[:page])
+        .get_by_tanto_id(anken_search.tanto_id).get_by_anken_status_cd(anken_search.anken_status_cd_search).order(updated_at: :desc).page(params[:page])
 
       else
         @ankens = Anken.includes([:customer,:tanto,:code_mst,:section])
-          .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0}).page(params[:page])
+          .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0}).order(updated_at: :desc).page(params[:page])
       end
     end
   end
