@@ -19,7 +19,7 @@ aria-controls="searchCondition"><span class="glyphicon glyphicon-plus"></span> �
     </div>
   </div>
 </div>
-<%= link_to 'Excel出力',ankens_path(@anken, format: :xlsx), class: 'btn btn-info' %>
+<%= link_to 'Excel出力',ankens_report_path(@anken, format: :xlsx), class: 'btn btn-info' %>
 
 <%= page_entries_info @ankens %>
 

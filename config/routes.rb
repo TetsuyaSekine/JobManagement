@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   patch '/ankens/:id', to: 'ankens#update'
   put '/ankens/:id', to: 'ankens#update'
   delete '/ankens/:id', to: 'ankens#destroy'
+  get '/ankens/report.xlsx', to: 'ankens#report', as: 'ankens_report'
 
   get '/ankens/comments/:id', to: 'ankens#comment_show', as: 'comment'
   get '/ankens/comments/:anken_id/new', to: 'ankens#comment', as: 'comments'
