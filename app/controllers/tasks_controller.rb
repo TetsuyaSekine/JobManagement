@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
   # GET /tasks
   # GET /tasks.json
   def index
     @tasks = Task.joins("LEFT OUTER JOIN code_msts ON tasks.status = code_msts.contents_cd")
-    .select("tasks.*,code_msts.contents").where(code_msts: {category_cd: '0002',del_flg: 0}).order(updated_at: :desc)
-    .page(params[:page])
+    .select("tasks.*,code_msts.contents").where(code_msts: {category_cd: '0002',del_flg: 0})
+    .order(sort_column + ' ' + sort_direction).page(params[:page])
 
     respond_to do |format|
       format.html
@@ -88,4 +88,13 @@ class TasksController < ApplicationController
     def getCodemst_for_options(categoryCd)
       @code_msts_for_options = CodeMst.where(category_cd: categoryCd).where(del_flg: 0)
     end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def sort_column
+      Task.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    end
+
 end

@@ -25,7 +25,7 @@ module ApplicationHelper
     if status.present?
       if status == 3
         return true;
-      end 
+      end
     end
   end
 
@@ -33,6 +33,9 @@ module ApplicationHelper
     if bln
       return "disabled"
     end
+  end
+
+  def showDelflg
   end
 
 end

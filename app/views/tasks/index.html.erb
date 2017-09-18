@@ -9,12 +9,12 @@
 <table class="table table-hover">
   <thead>
     <tr style="background-color: midnightblue;color: white;">
-      <th>ID</th>
-      <th>タイトル</th>
-      <th>詳細</th>
-      <th>期限</th>
-      <th>ステータス</th>
-      <th>備考</th>
+      <th><%= sortable "id", "ID" %></th>
+      <th><%= sortable "title", "タイトル" %></th>
+      <th><%= sortable "detail", "詳細" %></th>
+      <th><%= sortable "due", "期限" %></th>
+      <th><%= sortable "status", "ステータス" %></th>
+      <th><%= sortable "remark", "備考" %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
