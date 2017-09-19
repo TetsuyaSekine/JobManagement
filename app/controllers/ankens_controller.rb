@@ -5,6 +5,7 @@ class AnkensController < ApplicationController
   before_action -> {getCodemst_for_options('0001')}, only: [:index,:new,:edit]
   before_action :getSections_for_options, only: [:index,:new,:edit]
   before_action :comment_find, only: [:comment_edit,:comment_update,:comment_destroy]
+  helper_method :sort_column, :sort_direction
 
   def index
 
@@ -32,7 +33,7 @@ class AnkensController < ApplicationController
 
       @ankens = Anken.get_by_section_cd(params[:anken][:section_cd]).get_by_name(params[:anken][:anken_name])
       .get_by_summary(params[:anken][:anken_summary]).get_by_customer_id(params[:anken][:customer_id])
-      .get_by_tanto_id(params[:anken][:tanto_id]).get_by_anken_status_cd(params[:anken][:anken_status_cd]).order(updated_at: :desc).page(params[:page])
+      .get_by_tanto_id(params[:anken][:tanto_id]).get_by_anken_status_cd(params[:anken][:anken_status_cd]).order(sort_column + ' ' + sort_direction).page(params[:page])
 
       #検索条件をセッションに格納する
       session[:section_cd] = params[:anken][:section_cd]
@@ -57,11 +58,11 @@ class AnkensController < ApplicationController
       if anken_search.present?
         @ankens = Anken.get_by_section_cd(anken_search.section_cd_search).get_by_name(anken_search.anken_name)
         .get_by_summary(anken_search.anken_summary).get_by_customer_id(anken_search.customer_id)
-        .get_by_tanto_id(anken_search.tanto_id).get_by_anken_status_cd(anken_search.anken_status_cd_search).order(updated_at: :desc).page(params[:page])
+        .get_by_tanto_id(anken_search.tanto_id).get_by_anken_status_cd(anken_search.anken_status_cd_search).order(sort_column + ' ' + sort_direction).page(params[:page])
 
       else
         @ankens = Anken.includes([:customer,:tanto,:code_mst,:section])
-          .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0}).order(updated_at: :desc).page(params[:page])
+          .where(sections: {del_flg: 0},customers: {del_flg: 0},tantos: {del_flg: 0},code_msts: {category_cd: '0001',del_flg: 0}).order(sort_column + ' ' + sort_direction).page(params[:page])
       end
     end
   end
@@ -243,4 +244,13 @@ class AnkensController < ApplicationController
     def setLastUpdateUser
       @anken.last_update = current_user.username
     end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def sort_column
+      Task.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    end
+
 end
