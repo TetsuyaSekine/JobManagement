@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170903105349) do
+ActiveRecord::Schema.define(version: 20170921005623) do
 
   create_table "ankens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "section_cd"
@@ -78,8 +78,10 @@ ActiveRecord::Schema.define(version: 20170903105349) do
   create_table "shains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "shain_id"
     t.string   "name"
+    t.string   "section_cd"
     t.string   "section"
     t.string   "pb"
+    t.string   "group_cd"
     t.string   "group_team"
     t.string   "grade"
     t.string   "email"

@@ -1,5 +1,7 @@
 class ShainsController < ApplicationController
   before_action :set_shain, only: [:show, :edit, :update, :destroy]
+  before_action :getSections_for_options, only: [:new,:edit]
+
 
   # GET /shains
   # GET /shains.json
@@ -69,6 +71,11 @@ class ShainsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shain_params
-      params.require(:shain).permit(:shain_id, :name, :section, :pb, :group, :grade, :email, :charge, :del_flg)
+      params.require(:shain).permit(:shain_id, :name, :section_cd,:section, :pb,:group_cd, :group, :grade, :email, :charge, :del_flg)
     end
+
+    def getSections_for_options
+      @sections_for_options = Section.where(del_flg: 0)
+    end
+
 end
