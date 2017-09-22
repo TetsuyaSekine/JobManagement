@@ -155,6 +155,8 @@ class AnkensController < ApplicationController
       render :comment, flash: {errors: @comment.errors.full_messages}
     else
       if @comment.save
+        @anken_by_comment = Anken.find(@comment.anken_id)
+        @anken_by_comment.update_attributes(updated_at: Time.zone.now)
         redirect_to ankens_path, success: 'コメントが登録されました。'
       else
         redirect_to comments_path, danger: 'コメントの作成に失敗しました。'
@@ -165,6 +167,8 @@ class AnkensController < ApplicationController
   def comment_update
     @comment.last_update = current_user.username
     if @comment.update(comment_params)
+      @anken_by_comment = Anken.find(@comment.anken_id)
+      @anken_by_comment.update_attributes(updated_at: Time.zone.now)
       redirect_to ankens_path, success: 'コメント更新が完了しました。'
     else
       redirect_to comments_path, danger: 'コメントの更新に失敗しました。'
