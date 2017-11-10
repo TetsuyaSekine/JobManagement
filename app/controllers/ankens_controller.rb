@@ -55,6 +55,14 @@ class AnkensController < ApplicationController
     else
       #検索条件が存在した場合は、検索条件を指定した案件検索を行う。
       getSearchCondition(anken_search)
+
+      #初期表示するときに、ログインユーザーの部署の案件で絞られる
+      if anken_search.section_cd_search.blank?
+        arr = Array.new
+        anken_search.section_cd_search = arr.push(current_user.section_id)
+
+      end
+
       if anken_search.present?
         @ankens = Anken.get_by_section_cd(anken_search.section_cd_search).get_by_name(anken_search.anken_name)
         .get_by_summary(anken_search.anken_summary).get_by_customer_id(anken_search.customer_id)
