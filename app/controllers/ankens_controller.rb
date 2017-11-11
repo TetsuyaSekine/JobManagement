@@ -60,7 +60,11 @@ class AnkensController < ApplicationController
       if anken_search.section_cd_search.blank?
         arr = Array.new
         anken_search.section_cd_search = arr.push(current_user.section_id)
-
+        #defaultは、ステータスが、引合、提案前、提案済、提案結果待ち、受注、実施中で絞って検索する。
+        if anken_search.anken_status_cd_search.blank?
+          getActiveStatus
+          anken_search.anken_status_cd_search = @active_status
+        end
       end
 
       if anken_search.present?
@@ -263,6 +267,18 @@ class AnkensController < ApplicationController
 
     def sort_column
       Task.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    end
+
+    def getActiveStatus
+      @active_status = []
+      @code_msts_for_options.each do |code_mst|
+
+        ACTIVE_STATUS.each do |status|
+          if status == code_mst.contents
+            @active_status.push(code_mst.contents_cd)
+          end
+        end
+      end
     end
 
 end
