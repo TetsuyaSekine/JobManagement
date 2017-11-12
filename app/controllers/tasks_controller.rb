@@ -42,10 +42,10 @@ class TasksController < ApplicationController
       if @task.save
 
         #メールを送信 ログインユーザーの登録メールアドレスにnoticeメールを送信する。
-        email_prop = {}
-        email_prop.store("email",current_user.email)
-        email_prop.store("name",current_user.username)
-        PostMailer.welcome_email(current_user).deliver_now
+        email_prop = MailProp.new email: current_user.email,
+              for_name: current_user.username, title: "テスト送信", contents: "Aさんがコメントを追加しました。",
+              anken_info: "案件ID:3 案件名:次世代マッチング" ,send_name: "taro.yamada", url: "http://openam.vagrant.local.com:3000/tasks"
+        PostMailer.notice_for_comment(email_prop).deliver_now
 
         format.html { redirect_to tasks_path, success: 'タスクは正常に登録されました。' }
         format.json { render :show, status: :created, location: @task }
