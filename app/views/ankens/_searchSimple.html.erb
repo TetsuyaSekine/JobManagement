@@ -1,0 +1,10 @@
+<%= form_for(anken_search,url: ankens_search_path) do |f| %>
+  <% @code_msts_for_options.each do |c| %>
+    <label class="checkbox-inline">
+      <%= f.check_box :anken_status_cd,
+      {multiple: true,checked: chk_checked(["1","2","3","4","5"], c.contents_cd)},c.contents_cd,nil %>
+      <%= c.contents %>
+    </label>
+  <% end %>
+  <%= f.submit '表示',method: :post,class: "btn btn-primary" %>
+<% end %>
