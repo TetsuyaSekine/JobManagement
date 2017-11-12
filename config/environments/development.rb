@@ -54,4 +54,15 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'openam.vagrant.local.com', port: 3000 }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.mail.yahoo.co.jp",
+    :port => 587,
+    :domain => 'smtp.mail.yahoo.co.jp',
+    :user_name => "gfbf5_tetsu@yahoo.co.jp",
+    :password => "qwerasdzx3",
+    :authentication => 'plain',
+    :authentication => 'login'
+  }
 end

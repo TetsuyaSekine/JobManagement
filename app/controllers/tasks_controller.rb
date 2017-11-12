@@ -40,6 +40,13 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
+
+        #メールを送信 ログインユーザーの登録メールアドレスにnoticeメールを送信する。
+        email_prop = {}
+        email_prop.store("email",current_user.email)
+        email_prop.store("name",current_user.username)
+        PostMailer.welcome_email(current_user).deliver_now
+
         format.html { redirect_to tasks_path, success: 'タスクは正常に登録されました。' }
         format.json { render :show, status: :created, location: @task }
       else
