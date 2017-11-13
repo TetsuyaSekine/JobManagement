@@ -60,8 +60,8 @@ Rails.application.configure do
     :address => "smtp.mail.yahoo.co.jp",
     :port => 587,
     :domain => 'smtp.mail.yahoo.co.jp',
-    :user_name => "gfbf5_tetsu@yahoo.co.jp",
-    :password => "qwerasdzx3",
+    :user_name => "xxxxxx@yahoo.co.jp",
+    :password => "xxxxxxxxx",
     :authentication => 'plain',
     :authentication => 'login'
   }
