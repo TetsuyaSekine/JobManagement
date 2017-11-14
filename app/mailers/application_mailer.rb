@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'gfbf5_tetsu@yahoo.co.jp'
+  default from: 'notice@mail.jobmanagement.com'
   layout 'mailer'
 end
