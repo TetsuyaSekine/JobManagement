@@ -273,7 +273,7 @@ class AnkensController < ApplicationController
       @active_status = []
       @code_msts_for_options.each do |code_mst|
 
-        ACTIVE_STATUS.each do |status|
+        Settings.ACTIVE_STATUS.each do |status|
           if status == code_mst.contents
             @active_status.push(code_mst.contents_cd)
           end

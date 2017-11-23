@@ -7,9 +7,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :user_section
 
-  ACTIVE_STATUS = ["引合","提案前","提案済","提案結果待ち","受注"]
-  ACTIVE_STATUS.freeze
-
   def after_sign_in_path_for(resource)
       '/ankens'
   end

@@ -3,6 +3,9 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
   # GET /tasks
   # GET /tasks.json
+
+  include Common
+
   def index
     @tasks = Task.joins("LEFT OUTER JOIN code_msts ON tasks.status = code_msts.contents_cd")
     .select("tasks.*,code_msts.contents").where(code_msts: {category_cd: '0002',del_flg: 0})
@@ -42,10 +45,18 @@ class TasksController < ApplicationController
       if @task.save
 
         #メールを送信 ログインユーザーの登録メールアドレスにnoticeメールを送信する。
-        email_prop = MailProp.new email: current_user.email,
-              for_name: current_user.username, title: "テスト送信", contents: "Aさんがコメントを追加しました。",
-              anken_info: "案件ID:3 案件名:次世代マッチング" ,send_name: "taro.yamada", url: "http://openam.vagrant.local.com:3000/tasks"
-        PostMailer.notice_for_comment(email_prop).deliver_now
+#        email_prop = MailProp.new email: current_user.email,
+#              for_name: current_user.username, title: "テスト送信", contents: "Aさんがコメントを追加しました。",
+#              anken_info: "案件ID:3 案件名:次世代マッチング" ,send_name: "taro.yamada", url: "http://openam.vagrant.local.com:3000/tasks"
+#        PostMailer.notice_for_comment(email_prop).deliver_now
+        @email = current_user.email
+        @for_name = current_user.username
+        @title = Settings.notice_info.create_comment.title
+        @contents = Settings.notice_info.create_comment.contents
+        @anken_info = Settings.notice_info.create_comment.anken_info
+        @send_name = Settings.emails.for_name
+        @url = Settings.notice_info.create_comment.url
+        sendEmail
 
         format.html { redirect_to tasks_path, success: 'タスクは正常に登録されました。' }
         format.json { render :show, status: :created, location: @task }
