@@ -6,15 +6,15 @@
 
     notice_info:
       create_comment:
-        title: 'コメントが登録されました。'
+        title: '新規にコメントを登録しました。'
         contents: 'コメントが登録されました。'
         anken_info: '対象の案件はXXXです。'
-        url: 'http://openam.vagrant.local.com:3000'
+        url: 'http://172.19.80.225:3000'
       create_anken:
         title: '案件が作成されました。'
         contents: '新規に案件が登録されました。'
         anken_info: '対象の案件はXXXです。'
-        url: 'http://openam.vagrant.local.com:3000'
+        url: 'http://172.19.80.225:3000'
 
   development:
     <<: *defaults

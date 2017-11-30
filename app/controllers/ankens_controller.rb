@@ -7,8 +7,9 @@ class AnkensController < ApplicationController
   before_action :comment_find, only: [:comment_edit,:comment_update,:comment_destroy]
   helper_method :sort_column, :sort_direction
 
-  def index
+  include Common
 
+  def index
     @anken = Anken.new
     #検索条件用オブジェクト
     @anken_search = Anken.new
@@ -169,6 +170,10 @@ class AnkensController < ApplicationController
       if @comment.save
         @anken_by_comment = Anken.find(@comment.anken_id)
         @anken_by_comment.update_attributes(updated_at: Time.zone.now)
+
+        #コメント作成したら関係者にメールを送信する。
+        makeEmailbyCreateComment
+
         redirect_to ankens_path, success: 'コメントが登録されました。'
       else
         redirect_to comments_path, danger: 'コメントの作成に失敗しました。'
@@ -279,6 +284,18 @@ class AnkensController < ApplicationController
           end
         end
       end
+    end
+
+    def makeEmailbyCreateComment
+      @email = current_user.email
+      @for_name = current_user.username
+      getEmailsOfSection #ccに追加するメールアドレスを全件取得する。
+      @mail_title = "#{current_user.username} さんが、" + Settings.notice_info.create_comment.title
+      @contents = @comment.anken_comment
+      @anken_info = Settings.notice_info.create_comment.anken_info
+      @send_name = Settings.emails.for_name
+      @url = Settings.notice_info.create_comment.url
+      sendEmail
     end
 
 end
