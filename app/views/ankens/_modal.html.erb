@@ -25,6 +25,11 @@
               <%= f.text_area :anken_comment,:class => "form-control",style: "height:200px;",:placeholder => "案件に関するトピックスを記載" %>
             </div>
           </div>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :chkemail,{:checked => false},true,false %><em>コメント登録をメールをで知らせる</em>
+            </label>
+          </div>
         </div>
         <div class="modal-footer">
           <%= f.submit 'コメント登録',:class => 'col-sm-offset-2 btn btn-primary' %>

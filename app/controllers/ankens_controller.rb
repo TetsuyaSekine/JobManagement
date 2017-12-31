@@ -171,8 +171,14 @@ class AnkensController < ApplicationController
         @anken_by_comment = Anken.find(@comment.anken_id)
         @anken_by_comment.update_attributes(updated_at: Time.zone.now)
 
-        #コメント作成したら関係者にメールを送信する。
-        makeEmailbyCreateComment
+        #コメント作成したら関係者にメールを送信する。※メールを送信チェックがついていた場合。
+        chkemail = params[:comment][:chkemail]
+        logger.debug "ログ出力："
+        logger.debug chkemail
+
+        if chkemail
+          makeEmailbyCreateComment
+        end
 
         redirect_to ankens_path, success: 'コメントが登録されました。'
       else
@@ -225,6 +231,10 @@ class AnkensController < ApplicationController
       @anken = Anken.find(params[:id])
     end
 
+    def anken_find_arg(id)
+      @anken = Anken.find(id)
+    end
+
     def comment_find
       @comment = Comment.find(params[:id])
     end
@@ -235,7 +245,7 @@ class AnkensController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:anken_id,:ymd,:anken_comment,:last_update)
+      params.require(:comment).permit(:anken_id,:ymd,:anken_comment,:last_update,:chkemail)
     end
 
     def getSearchCondition(anken_search)
@@ -286,14 +296,22 @@ class AnkensController < ApplicationController
       end
     end
 
+    def makeEmailbyCreateAnken
+      @email = current_user.email
+    end
+
     def makeEmailbyCreateComment
       @email = current_user.email
       @for_name = current_user.username
       getEmailsOfSection #ccに追加するメールアドレスを全件取得する。
       @mail_title = "#{current_user.username} さんが、" + Settings.notice_info.create_comment.title
       @contents = @comment.anken_comment
-      @anken_info = Settings.notice_info.create_comment.anken_info
-      @send_name = Settings.emails.for_name
+
+      #案件情報を取りだす
+      anken_find_arg(@comment.anken_id)
+      @anken_info = "案件No：#{@comment.anken_id} 案件名：#{@anken.anken_name}"
+
+      @send_name = current_user.username
       @url = Settings.notice_info.create_comment.url
       sendEmail
     end
